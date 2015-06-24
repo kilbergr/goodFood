@@ -1,15 +1,15 @@
 <% include ../partials/header %>
 <form action="/recalls" method="POST">
-<label for="searchLoc">
-	Location:
-	<input type="text" name="" id="searchLoc">
+<label for="foodType">
+	Food:
+	<input type="text" name="" id="foodType">
 </label>
 <label for="searchLevel">
 	Danger Level:
-	<select name="mydropdown">
-		<option value="Milk">Fresh Milk</option>
-		<option value="Cheese">Old Cheese</option>
-		<option value="Bread">Hot Bread</option>
+	<select name="dangerLevel">
+		<option value="Class I">Class I (High Danger)</option>
+		<option value="Class II">Class II</option>
+		<option value="Class III">Class III (Violate labeling/manufacturing)</option>
 	</select>
 </label>
 	<input type="submit" value="Submit"></input>

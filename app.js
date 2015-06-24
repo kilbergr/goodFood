@@ -16,10 +16,16 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.use(morgan('tiny'));
 
+app.get('/', function(req, res){
+	res.redirect('/search')
+});
+
+app.get('/search', function(req, res){
+	res.render('recalls/search')
+})
 
 app.get('/recalls', function(req, res){
-	var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=reason_for_recall:"ice cream"&limit=25';
-//	var url = 'https://api.fda.gov/food/enforcement.json?api_key=GQisS7xWftem2wq39sv7zlVFVe7EG18DE2eFbDkI&search=reason_for_recall:%22lemon%22&limit=25'
+	var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=reason_for_recall:"' + food + '"&limit=25';
 	request(url, function(error, response, body){
 	 	if(error){
 	 		console.log(error);
@@ -35,7 +41,7 @@ app.get('/recalls', function(req, res){
 	})
 });
 
-app.listen(8000, function(){
-	console.log("listening on 8000");
+app.listen(8080, function(){
+	console.log("listening on 8080");
 });
 

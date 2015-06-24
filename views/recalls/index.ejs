@@ -7,8 +7,8 @@
 			<p>Why:	<%= recall.reason_for_recall %></p>
 			<p>Recalled from: <%= recall.distribution_pattern %>.</p>
 			<p>By whom: <%= recall.recalling_firm %></p>
-			<p>When: <%= recall.report_date %></p>
-			<p>Classification: <%= recall.classification %></p>
+			<p id="recency">When: <%= recall.report_date %></p>
+			<p id="classification">Classification: <%= recall.classification %></p>
 				
 			<form id="addFood" action="/recalls" method="POST">
 
