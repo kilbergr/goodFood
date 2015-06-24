@@ -1,0 +1,17 @@
+<% include ../partials/header %>
+<form action="/recalls" method="POST">
+<label for="searchLoc">
+	Location:
+	<input type="text" name="" id="searchLoc">
+</label>
+<label for="searchLevel">
+	Danger Level:
+	<select name="mydropdown">
+		<option value="Milk">Fresh Milk</option>
+		<option value="Cheese">Old Cheese</option>
+		<option value="Bread">Hot Bread</option>
+	</select>
+</label>
+	<input type="submit" value="Submit"></input>
+</form>
+<% include ../partials/footer %>

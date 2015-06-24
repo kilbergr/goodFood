@@ -1,0 +1,39 @@
+<%include ../partials/header %>
+	<% recalls.forEach(function(recall){%>
+		
+	<div>
+		<p>
+		<!-- Format date -->
+		<% var date = new Date(article.pub_date)%>
+		<% var pubdate = date.getMonth()+1+ '/' + date.getDate() + '/' + date.getFullYear(); %>
+
+	<!-- Function to retrieve geolocation -->
+	
+				<% for (var i = 0; i<article.keywords.length; i++){ %>
+					<% var loc = ''; %>
+						<% if (article.keywords[i].name === "glocations"){ %>
+								<% loc = article.keywords[i].value %>
+								<% } %>
+					<% } %>
+
+
+
+		<!-- What to display -->
+				<a href="<%= article.web_url %>"><%= article.headline.main %> </a><%= article.byline.original %>, from <%= pubdate %> in 
+				
+				<%= loc %> from the <%= article.news_desk %>/<%= article.section_name %> section.</p>
+				
+			<form id="addArt" action="/articles" method="POST">
+
+				<input type="hidden" name="article[title]" value=<%=article.headline.main%>> 
+				<input type="hidden" name="article[author]" value=<%article.byline.original%>> 
+				<input type="hidden" name="article[loc]" value=<%=article.geo_facet%>> 
+				 <input type="hidden" name="article[date]" value=<%=pubdate%>> 
+			 <input type="hidden" name="article[section]" value	=<%=article.news_desk%>> 
+				<input type="submit" value="Add Article">
+				
+			</form>
+		<% }) %>
+	</div>
+
+<%include ../partials/footer %>
