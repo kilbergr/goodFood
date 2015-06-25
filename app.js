@@ -20,8 +20,15 @@ app.get('/', function(req, res){
 	res.redirect('/search')
 });
 
+//to show search page
 app.get('/search', function(req, res){
 	res.render('recalls/search')
+})
+
+//to choose type of search
+app.post('/search', function(req, res){
+	var search = new db.Search(req.body.search);
+	
 })
 
 app.get('/recalls', function(req, res){

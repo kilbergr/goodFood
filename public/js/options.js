@@ -1,47 +1,48 @@
 $(function(){
 
-  function optionHTML(option) {
-    return '<div data-id="' + search._id + '"><p><a href="/searchs/' + search._id + '/">' + search.address + 
-           '</a></p><p>loc: ' + search.loc + ', date: ' + search.date + '</p>' +
-           '<p><a href="/searchs/' + search._id + '/edit">Change a search</a></p><hr></div>';
-     }
+//thanks to http://www.dyn-web.com/tutorials/forms/radio/get-selected.php
+  var radioValue = function(form, name){
+  	var radios = form.elements[name];
+  	 for (var i=0; i<radios.length; i++) {
+        if ( radios[i].checked ) { 
+        console.log(checked);// radio checked?
+           var val = radios[i].value; // if so, hold its value in val
+            return val; // and break out of for loop
+        }
+    }
+   alert(val);
+  }
 
-$('#lookUp').click(function(e) {
-    e.preventDefault();
-    var html = '<br/><form id="searchform" action="/search" method="POST">' +
-  '<div class="form-group">' +
-    '<label for="name">Food: </label>' +
-    '<input type="text" name="search[foodType]" id="foodType" autofocus>' +
-  '</div><div>OR</div>' + 
-  '<div class="form-group">' +
-    '<label for="loc">Location: </label>' +
-    '<input type="text" name="search[loc]" id="loc"></div><div>OR</div><div>' +
-    '<label for="date">Date of Interest: </label>' +
-    '<input type="text" name="search[date]" id="date">' +
-  '</div>' +
-  '<input type="submit" value="Search">' +
+$('#searchForm').click(function(event){
+	event.preventDefault();
+//for food name or distribution area, will do date later
+	var html = '<div><form id="newSearch" action="/recalls" method="POST">' +
+	'<label for="inReason">Food: <input type="text" name="recall[foodType]" id="foodType" autofocus>' +
+	'</label></div><input type="submit" value="Find recalls">' +
 '</form>';
 
-    $('#needID').after(html);
-    $('#newplaceform').submit(function(e) {
+	$('#typeOfQuery').after(html);
+	$('#searchForm').submit(function(e) {
       e.preventDefault();
-      var foodType = $('#foodType').val();
-      var loc = $('#loc').val();
-      var date = $('#date').val();
-      var data = {search: {address: address, loc: loc, date: date}};
+       radioValue(document.getElementById('searchForm'), 'search');
+      var data = {place: {address: address, lat: lat, long: long}};
     
 
       $.ajax({
         type: 'POST',
-        url: '/search',
+        url: '/recalls',
         data: data,
         dataType: 'json'
        }).done(function(data) {
 
-         $('#addedPoints').append(searchHTML(data.search));
-         $('#addsearch').remove();
+        // $('#addedPoints').append(placeHTML(data.place));
+         $('#searchForm').remove();
+         
       });
-    });
-  });
-})
+     });
+	});
+});
+
+// radios = document.getElementById('searchForm').elements['search'];
+// })
 

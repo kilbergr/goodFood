@@ -1,12 +1,15 @@
-<% include ../partials/header %>
-<h2 id="lookUp">How would you like to search?</h2>
+<% include ../partials/headerSearch %>
+  <h2 id="lookUp">How would you like to search?</h2>
 
   <div class="form-group">
- <form id="searchform" action="/search" method="POST">
-<input type="radio" name="search" value="foodType" checked>Type of Food
-<input type="radio" name="search" value="location">Distribution Area
-<input type="radio" name="search" value="date">Date Range
-  <input type="submit" value="Enter Search Criteria">
+ <form id="searchForm" action="/search" method="POST">
+ <label for="foodType">
+<input type="radio" name="search" value="foodType" id="foodType" onclick=radioValue(document.getElementById('searchForm'), 'search')>Type of Food</label>
+ <label for="location">
+<input type="radio" name="search" value="location" id="location" onclick=radioValue(document.getElementById('searchForm'), 'search')>Distribution Area</label>
+ <label for="date">
+<input type="radio" name="search" value="date" id="dateRange" onclick=radioValue(document.getElementById('searchForm'), 'search')>Date Range</label>
+<input type="submit" value="Submit">
   </div>
 </form>
 
