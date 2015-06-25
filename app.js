@@ -27,8 +27,8 @@ app.get('/search', function(req, res){
 
 //to choose type of search
 app.post('/search', function(req, res){
-	var search = new db.Search(req.body.search);
-	
+	//var search = new db.Search(req.body.search);
+
 })
 
 app.get('/recalls', function(req, res){

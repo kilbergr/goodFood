@@ -1,10 +1,10 @@
 <% include ../partials/headerSearch %>
   <h2 id="lookUp">How would you like to search?</h2>
 
-  <div class="form-group">
+  <div id="typeOfQuery">
  <form id="searchForm" action="/search" method="POST">
  <label for="foodType">
-<input type="radio" name="search" value="foodType" id="foodType" onclick=radioValue(document.getElementById('searchForm'), 'search')>Type of Food</label>
+<input type="radio" name="search" value="foodType" id="foodType">Type of Food</label>
  <label for="location">
 <input type="radio" name="search" value="location" id="location" onclick=radioValue(document.getElementById('searchForm'), 'search')>Distribution Area</label>
  <label for="date">
