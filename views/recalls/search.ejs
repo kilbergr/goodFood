@@ -1,17 +1,33 @@
 <% include ../partials/header %>
-<form action="/recalls" method="POST">
+<h2 id="lookUp">How would you like to search?</h2>
+
+  <div class="form-group">
+ <form id="searchform" action="/search" method="POST">
+<input type="radio" name="search" value="foodType" checked>Type of Food
+<input type="radio" name="search" value="location">Distribution Area
+<input type="radio" name="search" value="date">Date Range
+  <input type="submit" value="Enter Search Criteria">
+  </div>
+</form>
+
+
+<!-- <form action="/recalls" method="POST">
 <label for="foodType">
 	Food:
 	<input type="text" name="" id="foodType">
 </label>
-<label for="searchLevel">
+ -->
+
+
+
+
+<!-- <label for="searchLevel">
 	Danger Level:
 	<select name="dangerLevel">
 		<option value="Class I">Class I (High Danger)</option>
 		<option value="Class II">Class II</option>
 		<option value="Class III">Class III (Violate labeling/manufacturing)</option>
 	</select>
-</label>
-	<input type="submit" value="Submit"></input>
-</form>
+</label> -->
+
 <% include ../partials/footer %>
