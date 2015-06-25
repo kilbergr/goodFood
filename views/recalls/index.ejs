@@ -2,26 +2,37 @@
 <a href="/search">New Search</a>
 	<% recalls.forEach(function(recall){%>
 		
-	<div>
+	
 		<!-- What to display -->
+		<% if(recall.classification==='Class I'){%>
+			<div class="high">
+		
+		<%} %>
+		<% if(recall.classification==='Class II'){%>
+	  <div class="mid">
+		<%} %>
+		<% if(recall.classification==='Class III'){%>
+			<div class="low">
+		<%} %>
 			<p>What: <%= recall.product_description %></p>
 			<p>Why:	<%= recall.reason_for_recall %></p>
 			<p>Recalled from: <%= recall.distribution_pattern %>.</p>
 			<p>By whom: <%= recall.recalling_firm %></p>
 			<p id="recency">When: <%= recall.report_date %></p>
-			<p id="classification">Classification: <%= recall.classification %></p>
-				
+			<p>Classification: <%= recall.classification %></p>
+		
 			<form id="addFood" action="/show" method="POST">
 
 				<input type="hidden" name="recall[desc]" value=<%= recall.product_description %>> 
 				<input type="hidden" name="recall[reason]" value=<%recall.reason_for_recall%>> 
 				<input type="hidden" name="recall[dist]" value=<%=recall.distribution_pattern%>> 
-				 <input type="hidden" name="recall[firm]" value=<%=recall.recalling_firm%>> 
+				<input type="hidden" name="recall[firm]" value=<%=recall.recalling_firm%>> 
 			 <input type="hidden" name="recall[date]" value	=<%=recall.report_date%>> 
 			  <input type="hidden" name="recall[class]" value	=<%=recall.classification%>> 
 				<input type="submit" value="Save Entry">
 				
 			</form>
+					<hr>
 		<% }) %>
 	</div>
 

@@ -8,3 +8,14 @@ body{
 #classification{
 	background-color: red;
 }
+
+.high{
+background-color: #eee0ee;
+}
+
+.mid{
+	background-color: #eee7e0;
+}
+.low{
+	background-color: #e0e7ee;
+}
