@@ -44,36 +44,39 @@ app.get('/recalls', function(req, res){
 })
 
 app.post('/recalls', function(req, res){
-	var recallQuery = new db.RecallQuery(req.body.recallQuery);
-		if(recallQuery.foodType!==undefined){
-			console.log(recallQuery.foodType);
-			//can change later such that you can check a number of these boxes. Will change the terms then to search=field:term+AND+field:term
-			//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=reason_for_recall:"ice cream"&limit=25'
-			var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=reason_for_recall:"' + recallQuery.foodType + '"&limit=25';
+	var recall = new db.Recall(req.body.recall);
+	console.log(recall.foodType);
+	if(recall.foodType!==undefined){
+		console.log(recall.foodType);
+		//can change later such that you can check a number of these boxes. Will change the terms then to search=field:term+AND+field:term
+		//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=reason_for_recall:"ice cream"&limit=25'
+		var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=reason_for_recall:"' + recall.foodType + '"&limit=25';
+	}
+	else if (recall.location!==undefined){
+		//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=distribution_pattern:"ID"&limit=25
+		var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=distribution_pattern:"' + recall.location + '"&limit=25';
+	}
+	else if (recall.dateBegin!==undefined && recall.dateEnd!==undefined){
+		//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=[2004-01-01+TO+2005-01-01]&limit=25
+		var url= 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=['+recall.dateBegin+'+TO+'+recall.dateEnd+']&limit=25';
+	}
+	
+	console.log(url);
+	console.log(req.body);
+	request(url, function(error, response, body){
+	 	if(error){
+	 		console.log(error);
+			res.render('errors/500');
 		}
-		else if (recallQuery.location!==undefined){
-			//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=distribution_pattern:"ID"&limit=25
-			var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=distribution_pattern:"' + recallQuery.location + '"&limit=25';
-		}
-		else if (recallQuery.dateBegin!==undefined && recallQuery.dateEnd!==undefined){
-			//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=[2004-01-01+TO+2005-01-01]&limit=25
-			var url= 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=['+recallQuery.dateBegin+'+TO+'+recallQuery.dateEnd+']&limit=25';
-		}
-		
-		console.log(url);
-		request(url, function(error, response, body){
-		 	if(error){
-		 		console.log(error);
-				res.render('errors/500');
-			}
-		 else if(!error && response.statusCode !==200){
-		 	console.log(response.statusCode);
-      res.render('errors/404')
-		}
-		else{
-		  var recalls = JSON.parse(body).results;
-			res.render('recalls/index', {recalls:recalls});
-		}
+	 else if(!error && response.statusCode !==200){
+	 	console.log(response.statusCode);
+    res.render('errors/404')
+	}
+	else{
+				 	console.log(response.statusCode);
+	  var recalls = JSON.parse(body).results;
+		res.render('recalls/index', {recalls:recalls});
+	}
 	})
 });
 

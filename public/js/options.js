@@ -47,27 +47,27 @@ $('#searchForm').submit(function(event){
 		}
 
 	$('#searchForm').after(html);
-	$(divSubmit).submit(function(e) {
-      e.preventDefault();
-      //add info to recallQuery obj from form
-      var foodType = $('#food').val();
-      var location = $('#loc').val();
-      var dateBegin= $('#dateBegin').val();
-      var dateEnd = $('#dateEnd').val();
-      var data = {recallQuery: {foodType: foodType, location:location, dateBegin: dateBegin, dateEnd: dateEnd}}
-      console.log(data);
+	// $(divSubmit).submit(function(e) {
+ //      e.preventDefault();
+ //      //add info to recallQuery obj from form
+ //      var foodType = $('#food').val();
+ //      var location = $('#loc').val();
+ //      var dateBegin= $('#dateBegin').val();
+ //      var dateEnd = $('#dateEnd').val();
+ //      var data = {recallQuery: {foodType: foodType, location:location, dateBegin: dateBegin, dateEnd: dateEnd}}
+ //      console.log(data);
 
-      $.ajax({
-        type: 'POST',
-        url: '/recalls',
-        data: data,
-        dataType: 'json'
-       }).done(function(data) {
-       	
-         $('#searchForm').remove();
+      // $.ajax({
+      //   type: 'POST',
+      //   url: '/recalls',
+      //   data: data,
+      //   dataType: 'json'
+      //  }).done(function(data) {
 
-      });
-     });
+      //    $('#searchForm').remove();
+
+      // });
+   
 	});
 });
 

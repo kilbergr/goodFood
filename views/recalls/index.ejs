@@ -1,4 +1,5 @@
 <%include ../partials/header %>
+<a href="/search">New Search</a>
 	<% recalls.forEach(function(recall){%>
 		
 	<div>
@@ -10,7 +11,7 @@
 			<p id="recency">When: <%= recall.report_date %></p>
 			<p id="classification">Classification: <%= recall.classification %></p>
 				
-			<form id="addFood" action="/recalls" method="POST">
+			<form id="addFood" action="/show" method="POST">
 
 				<input type="hidden" name="recall[desc]" value=<%= recall.product_description %>> 
 				<input type="hidden" name="recall[reason]" value=<%recall.reason_for_recall%>> 
