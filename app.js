@@ -59,6 +59,7 @@ app.post('/recalls', function(req, res){
 	else if (recall.dateBegin!==undefined && recall.dateEnd!==undefined){
 		//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=[2004-01-01+TO+2005-01-01]&limit=25
 		var url= 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=['+recall.dateBegin+'+TO+'+recall.dateEnd+']&limit=25';
+//var url= 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=['+recall.yearBegin+'-'+ recall.monthBegin + '-' + recall.dayBegin + '+TO+'+recall.yearEnd+'-'+ recall.monthEnd + '-' + recall.dayEnd +']&limit=25';
 	}
 	
 	console.log(url);

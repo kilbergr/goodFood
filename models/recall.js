@@ -3,6 +3,12 @@ var mongoose = require("mongoose");
 var recallSchema = new mongoose.Schema({
   foodType: String,
 	location: String,
+	// yearBegin: String,
+	// monthBegin: String,
+	// dayBegin: String,
+	// yearEnd: String,
+	// monthEnd: String,
+	// dayEnd: String,
 	dateBegin: String,
 	dateEnd: String,
 	desc: String,
