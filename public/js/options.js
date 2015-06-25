@@ -18,33 +18,34 @@ $('#searchForm').submit(function(event){
 	event.preventDefault();
 	var val =  radioValue();
 	if(val==='foodType'){
-			var html = '<div><form id="newSearch" action="/recalls" method="POST">' +
+			var html = '<div><form id="newFoodSearch" action="/recalls" method="POST">' +
 		'<label for="inReason">Food: <input type="text" name="recall[foodType]" id="foodType" autofocus>' +
 		'</label><input type="submit" value="Find recalls"></div>' +
 		'</form>';
 		}
 		//for searching by distribution area
 		else if (val ==='location'){
-				var html = '<div><form id="newSearch" action="/recalls" method="POST">' +
+				var html = '<div><form id="newLocSearch" action="/recalls" method="POST">' +
 			'<label for="inReason">Location: <input type="text" name="recall[location]" id="location" autofocus>' +
 			'</label><input type="submit" value="Find recalls"></div>' +
 			'</form>';
 		}
 		//for searching by date range
 		else if (val === 'date'){
-			'<div><form id="newSearch" action="/recalls" method="POST">' +
-			'<label for="inReason">Beginning of Date Range: <input type="text" name="recall[dateBegin]" id="dateBegin" autofocus>' +
-			'</label><label for="inReason">End of Date Range: <input type="text" name="recall[dateEnd]" id="dateEnd">' +
+			var html = '<div><form id="newDateSearch" action="/recalls" method="POST">' +
+			'<label for="inReason">Beginning of Range: <input type="text" name="recall[dateBegin]" id="dateBegin" autofocus>' +
+			'</label><label for="inReason">  End of Range: <input type="text" name="recall[dateEnd]" id="dateEnd">' +
 			'</label><input type="submit" value="Find recalls"></div>' +
 			'</form>';
+		}
+		else{
+			alert("Please select type of search!");
 		}
 
 	$('#typeOfQuery').after(html);
 	$('#searchForm').submit(function(e) {
       e.preventDefault();
-      // var data = {place: {address: address, lat: lat, long: long}};
-    
-
+      
       $.ajax({
         type: 'POST',
         url: '/recalls',

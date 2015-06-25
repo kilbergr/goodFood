@@ -32,7 +32,17 @@ app.post('/search', function(req, res){
 })
 
 app.get('/recalls', function(req, res){
-	var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=reason_for_recall:"' + food + '"&limit=25';
+	if(document.getElementById('newFoodSearch')){
+		//can change later such that you can check a number of these boxes. Will change the terms then to search=field:term+AND+field:term
+		var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=reason_for_recall:"' + food + '"&limit=25';
+	}
+	else if (document.getElementById('newLocSearch')){
+		var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=distribution_pattern:"' + location + '"&limit=25';
+	}
+	else if (document.getElementById('newDateSearch')){
+		var url= 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=reason_for_recall:"['+dateBegin+'TO'+dateEnd+']"&limit=25';
+	}
+	
 	request(url, function(error, response, body){
 	 	if(error){
 	 		console.log(error);
