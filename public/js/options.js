@@ -45,6 +45,11 @@ $('#searchForm').submit(function(event){
 	$('#typeOfQuery').after(html);
 	$('#searchForm').submit(function(e) {
       e.preventDefault();
+      var foodType = $('#foodType').val();
+      var location = $('#location').val();
+      var dateBegin= $('#dateBegin').val();
+      var dateEnd = $('#dateEnd').val();
+      var data = {recallQuery: {foodType: foodType, location:location, dateBegin: dateBegin, dateEnd: dateEnd}};
       
       $.ajax({
         type: 'POST',
