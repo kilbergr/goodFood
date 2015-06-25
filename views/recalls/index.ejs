@@ -14,6 +14,7 @@
 		<% if(recall.classification==='Class III'){%>
 			<div class="low">
 		<%} %>
+
 			<p>What: <%= recall.product_description %></p>
 			<p>Why:	<%= recall.reason_for_recall %></p>
 			<p>Recalled from: <%= recall.distribution_pattern %>.</p>
@@ -21,13 +22,13 @@
 			<p id="recency">When: <%= recall.report_date %></p>
 			<p>Classification: <%= recall.classification %></p>
 		
-			<form id="addFood" action="/show" method="POST">
+			<form id="addFood" action="/recalls/<%= recall.id %>" >
 
 				<input type="hidden" name="recall[desc]" value=<%= recall.product_description %>> 
-				<input type="hidden" name="recall[reason]" value=<%recall.reason_for_recall%>> 
+				<input type="hidden" name="recall[reason]" value=<%=recall.reason_for_recall%>> 
 				<input type="hidden" name="recall[dist]" value=<%=recall.distribution_pattern%>> 
 				<input type="hidden" name="recall[firm]" value=<%=recall.recalling_firm%>> 
-			 <input type="hidden" name="recall[date]" value	=<%=recall.report_date%>> 
+			  <input type="hidden" name="recall[date]" value	=<%=recall.report_date%>> 
 			  <input type="hidden" name="recall[class]" value	=<%=recall.classification%>> 
 				<input type="submit" value="Save Entry">
 				

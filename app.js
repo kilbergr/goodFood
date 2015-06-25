@@ -47,7 +47,6 @@ app.post('/recalls', function(req, res){
 	var recall = new db.Recall(req.body.recall);
 	console.log(recall.foodType);
 	if(recall.foodType!==undefined){
-		console.log(recall.foodType);
 		//can change later such that you can check a number of these boxes. Will change the terms then to search=field:term+AND+field:term
 		//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=reason_for_recall:"ice cream"&limit=25'
 		var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=reason_for_recall:"' + recall.foodType + '"&limit=25';
@@ -63,7 +62,6 @@ app.post('/recalls', function(req, res){
 	}
 	
 	console.log(url);
-	console.log(req.body);
 	request(url, function(error, response, body){
 	 	if(error){
 	 		console.log(error);
@@ -80,6 +78,14 @@ app.post('/recalls', function(req, res){
 	}
 	})
 });
+
+app.get('/recalls/:id', function(req, res){
+	db.Recall.findById(req.params.id, function(err, recall){
+		res.render('recalls/show');
+	})
+	
+})
+
 
 app.listen(8080, function(){
 	console.log("listening on 8080");

@@ -1,4 +1,4 @@
-$(function(){
+$(document).ready(function(){
 
 
   var radioValue = function(){
@@ -13,6 +13,10 @@ $(function(){
           }
         }
       }
+
+// $("#dateBegin").datepicker({
+// 	format: "yyyy-mm-dd"
+// });
 
 $('#searchForm').submit(function(event){
 	event.preventDefault();
@@ -32,11 +36,17 @@ $('#searchForm').submit(function(event){
 		//for searching by date range
 		else if (val === 'date'){
 			var html = '<div><form id="newDateSearch" action="/recalls" method="POST">' +
+			//Trying with datepicker
+			//'<label for="inReason">Beginning of Range: <input type="text" name="test" id="dateBegin"></label>'
+		  //'<label for="inReason">Beginning of Range: <input type="text" name="recall[dateBegin]" id="dateBegin" placeholder="YYYY-MM-DD">'
 			'<label for="inReason">Beginning of Range: <input type="text" name="recall[dateBegin]" id="dateBegin" autofocus placeholder="YYYY-MM-DD">' +
-			'</label><label for="inReason">  End of Range: <input type="text" name="recall[dateEnd]" id="dateEnd" placeholder="YYYY-MM-DD"></label>'
+	    '</label><label for="inReason">  End of Range: <input type="text" name="recall[dateEnd]" id="dateEnd" placeholder="YYYY-MM-DD"></label>'
 			//divSubmit = '#newDateSearch';
 		}
+		else {
+			alert('Please choose a search type');
 
+		}
 		
 	$('#searchForm').after(html + '<input type="submit" value="Find recalls"></div></form>');
 	// $(divSubmit).submit(function(e) {
