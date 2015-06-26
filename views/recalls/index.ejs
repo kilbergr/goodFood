@@ -31,16 +31,17 @@
 				<input type="submit" value="More Info">
 				
 			</form>
-			</div>
+
 			<div id="moreInfo">
 			<p>Why: <%= recall.reason_for_recall %></p>
 			<p>Recalled from: <%= recall.distribution_pattern %>.</p>
  			<p>Risk Classification: <%= recall.classification %></p>
+ 			<form id="showLess" action="javascript:void(0)"><input type="submit" value="Less Info"></form>
  		</div>
 	
-			</div>
-					<hr>
+			<hr>
+				
 		<% }) %>
 	</div>
-
+	
 <%include ../partials/footer %>

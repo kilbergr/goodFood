@@ -55,15 +55,14 @@ $('#searchForm').submit(function(event){
 //show more info on request
 $('#showMore').submit(function(e){
 	e.preventDefault();
-	var infoHTML = '<div>$('#showMore').after(infoHTML);		
-
+	$('#moreInfo').css('display', 'block')
 })
 
-$.get('/recalls').done(function(data){
-	console.log(data);
-	alert(data.'#showMore');
+//show less info on request
+$('#showLess').submit(function(e){
+	e.preventDefault();
+	$('#moreInfo').css('display', 'none')
 })
-
 
 	// $(divSubmit).submit(function(e) {
  //      e.preventDefault();
