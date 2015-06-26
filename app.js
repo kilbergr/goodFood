@@ -78,6 +78,49 @@ app.post('/recalls', function(req, res){
 	})
 });
 
+//to view personal database
+app.get('/myRecalls', function(req,res){
+  db.myRecall.find({}, function(err,myRecalls){
+          res.format({ 
+        'text/html': function(){
+          res.render("myRecalls/index", {myRecalls:myRecalls});
+        },
+        'application/json': function(){
+          res.send({myRecalls:myRecalls});
+        },
+        'default': function(){
+          res.status(404).send('Not Acceptable');
+        }
+      })
+    });
+});
+//to add to personal database
+app.post('/myRecalls', function(req,res){
+  var myRecall = new db.MyRecall(req.body.myRecall);
+	myRecall.save(function(err,myRecall) {
+      	res.format({
+        'text/html': function(){
+          res.render("myRecalls");
+        },
+        'application/json': function(){
+          res.send({myRecall:myRecall});
+        },
+        'default': function(){
+          res.status(406).send('Not Acceptable');
+        }
+      })
+     })
+});
+
+
+
+app.get('/recalls/:id', function(req, res){
+	db.Recall.findById(req.params.id, function(err,recall){
+    res.render("recalls/show", {recall:recall});
+  });
+})
+
+app.post('/recalls/:id')
 
 app.listen(8080, function(){
 	console.log("listening on 8080");

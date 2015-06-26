@@ -37,7 +37,7 @@ $('#searchForm').submit(function(event){
 		//for searching by date range
 		else if (val === 'date'){
 			var html = '<div><form id="newDateSearch" action="/recalls" method="POST">' +
-			//Trying datepicker
+			//Trying datepicker and failing
 			//'<label for="inReason">Beginning of Range: <input type="text" name="test" id="dateBegin"></label>'
 		  //'<label for="inReason">Beginning of Range: <input type="text" name="recall[dateBegin]" id="dateBegin" placeholder="YYYY-MM-DD">'
 			'<label for="inReason">Beginning of Range: <input type="text" name="recall[dateBegin]" id="dateBegin" autofocus placeholder="YYYY-MM-DD">' +
@@ -64,27 +64,36 @@ $('#showLess').submit(function(e){
 	$('#moreInfo').css('display', 'none');
 })
 
-	// $(divSubmit).submit(function(e) {
- //      e.preventDefault();
- //      //add info to recallQuery obj from form
- //      var foodType = $('#food').val();
- //      var location = $('#loc').val();
- //      var dateBegin= $('#dateBegin').val();
- //      var dateEnd = $('#dateEnd').val();
- //      var data = {recallQuery: {foodType: foodType, location:location, dateBegin: dateBegin, dateEnd: dateEnd}}
- //      console.log(data);
+$('#saveRecall').submit(function(e){
+	e.preventDefault();
+	var data = {myRecall: {reason_for_recall: reason_for_recall, product_description: product_description, distribution_pattern: distribution_pattern}};
+	 $.ajax({	
+        type: 'POST',
+        url: '/myRecalls',
+        data: data,
+        dataType: 'json'
+       }).done(function(data) {
+       	console.log(data);
+       });
+})
 
-      // $.ajax({
-      //   type: 'POST',
-      //   url: '/recalls',
-      //   data: data,
-      //   dataType: 'json'
-      //  }).done(function(data) {
+  function saveRecall() {
+    $.getJSON("/myRecalls").done(function(data) {
+        data.myRecalls.forEach(function(myRecall) {
+            var html = recallHTML(myRecall);
+        });
+    });
+  }
 
-      //    $('#searchForm').remove();
+  function recallHTML(myRecall) {
+    return '<div data-id="' + myRecall._id + '"><p><a href="/myRecalls/' + myRecall._id + '/">' + myRecall.product_description + 
+           '</a></p><p>Reason: ' + myRecall.reason_for_recall + ', Distribution Pattern: ' + myRecall.distribution_pattern + '</p>' +
+           '<hr></div>';
+     }
 
-      // });
+saveRecall();
 
+     
 //Google Maps Section
 //styling
 var map,
@@ -116,7 +125,7 @@ var map,
 
   var styledMap = new google.maps.StyledMapType(styles,
     {name: "Styled Map"});
-//beginning view
+//beginning view--for some reason has to be weirdly centered to show US
  var mapOptions = {
       zoom: 3,
       center: {lat: 55.8282, lng: -128.5795},

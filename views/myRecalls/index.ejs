@@ -1,0 +1,8 @@
+<% include ../partials/header %>
+<h1>Recalls You've Saved:</h1>
+<% myRecalls.forEach(function(myRecall){%>
+
+<p>What: <%= myRecall.product_description %></p>
+			<p>By whom: <%= myRecall.recalling_firm %></p>
+			<p id="recency">When: <%= myRecall.report_date %></p>
+<% include ../partials/footer %>

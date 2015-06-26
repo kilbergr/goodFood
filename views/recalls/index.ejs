@@ -2,6 +2,7 @@
 <a href="/search">New Search</a>
 <!-- <a class="twitter-timeline" href="https://twitter.com/search?q=%23recall%20food" data-widget-id="614247041103872000">Tweets about food #recall(s)</a> -->
 <!--<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>-->
+	
 	<% recalls.forEach(function(recall){%>
 		
 	
@@ -40,7 +41,7 @@
  			<p>Risk Classification: <%= recall.classification %></p>
  		
  			<form id="showLess" action="javascript:void(0)"><input type="submit" value="Less Info"></form>
-			<form id ="saveRecall" action=""><input type="submit" value="Save to My Recalls"></form>
+			<form id ="saveRecall" action="/myRecalls" method="POST"><input type="submit" value="Save to My Recalls"></form>
  		</div>
 
 	
