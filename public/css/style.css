@@ -23,3 +23,10 @@ background-color: #eee0ee;
 #moreInfo {
 	display: none;
 }
+
+#map-canvas {
+	height: 300px;
+	width: 400px;
+	float: right;
+	margin-top: -150px;
+}

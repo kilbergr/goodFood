@@ -78,20 +78,6 @@ app.post('/recalls', function(req, res){
 	})
 });
 
-// app.get('/recalls/:desc', function(req, res){
-// 	db.Recall.findById(req.params.desc, function(err, recall){
-// 		if(err){
-// 			console.log(err);
-// 			res.render('recalls/index')
-// 		}
-// 		else{
-// 			res.render('recalls/show', {recall: recall});
-// 		}
-		
-// 	})
-	
-// })
-
 
 app.listen(8080, function(){
 	console.log("listening on 8080");

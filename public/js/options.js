@@ -48,18 +48,20 @@ $('#searchForm').submit(function(event){
 			alert('Please choose a search type');
 		}	
 	$('#searchForm').after(html + '<input type="submit" value="Find recalls"></div></form>');
+  
 	});
 
 //show more info on request
 $('#showMore').submit(function(e){
 	e.preventDefault();
-	$('#moreInfo').css('display', 'block')
+	$('#moreInfo').css('display', 'block');
+	google.maps.event.trigger(map, 'resize');
 })
 
 //show less info on request
 $('#showLess').submit(function(e){
 	e.preventDefault();
-	$('#moreInfo').css('display', 'none')
+	$('#moreInfo').css('display', 'none');
 })
 
 	// $(divSubmit).submit(function(e) {
@@ -116,8 +118,8 @@ var map,
     {name: "Styled Map"});
 //beginning view
  var mapOptions = {
-      zoom: 5,
-      center: {lat: 40.7033127, lng: -73.979681},
+      zoom: 3,
+      center: {lat: 55.8282, lng: -128.5795},
        mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
       }
@@ -131,8 +133,10 @@ var map,
     var mapDiv = document.getElementById('map-canvas');
      
   }
-  initialize();
-});
+google.maps.event.addDomListener(window, 'load', initialize);
+initialize();
+// google.maps.event.trigger($("#map-canvas")[0], 'resize');
+ });
 
 
 		/*else if (val === 'date'){
