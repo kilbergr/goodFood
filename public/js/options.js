@@ -71,6 +71,57 @@ $('#searchForm').submit(function(event){
       // });
    
 	});
+
+
+//Google Maps Section
+//styling
+var map,
+  markers =[];
+  function initialize() {
+
+    var styles = [
+  {
+    featureType: "all",
+    stylers: [
+    { hue: "#00ffee" },
+      { saturation: -50 }
+    ]
+  },{
+    featureType: "road.arterial",
+    elementType: "geometry",
+    stylers: [
+      
+      { saturation: 80 }
+    ]
+  },{
+    featureType: "poi.business",
+    elementType: "labels",
+    stylers: [
+      { visibility: "off" }
+    ]
+  }
+];
+
+  var styledMap = new google.maps.StyledMapType(styles,
+    {name: "Styled Map"});
+//beginning view
+ var mapOptions = {
+      zoom: 5,
+      center: {lat: 40.7033127, lng: -73.979681},
+       mapTypeControlOptions: {
+      mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+      }
+    };
+    map = new google.maps.Map(document.getElementById('map-canvas'),
+    mapOptions);
+
+  map.mapTypes.set('map_style', styledMap);
+  map.setMapTypeId('map_style');
+
+    var mapDiv = document.getElementById('map-canvas');
+     
+  }
+  initialize();
 });
 
 

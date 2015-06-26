@@ -57,7 +57,7 @@ app.post('/recalls', function(req, res){
 	}
 	else if (recall.dateBegin!==undefined && recall.dateEnd!==undefined){
 		//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=[2004-01-01+TO+2005-01-01]&limit=25
-		var url= 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=['+recall.dateBegin+'+TO+'+recall.dateEnd+']&limit=25';
+		var url= 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=report_date:['+recall.dateBegin+'+TO+'+recall.dateEnd+']&limit=25';
 //var url= 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=['+recall.yearBegin+'-'+ recall.monthBegin + '-' + recall.dayBegin + '+TO+'+recall.yearEnd+'-'+ recall.monthEnd + '-' + recall.dayEnd +']&limit=25';
 	}
 	
@@ -72,7 +72,7 @@ app.post('/recalls', function(req, res){
     res.render('errors/404')
 	}
 	else{
-				 	console.log(response.statusCode);
+		console.log(response.statusCode);
 	  var recalls = JSON.parse(body).results;
 		res.render('recalls/index', {recalls:recalls});
 	}
@@ -81,7 +81,14 @@ app.post('/recalls', function(req, res){
 
 app.get('/recalls/:id', function(req, res){
 	db.Recall.findById(req.params.id, function(err, recall){
-		res.render('recalls/show');
+		if(err){
+			console.log(err);
+			res.render('recalls/index')
+		}
+		else{
+			res.render('recalls/show', {recall: recall});
+		}
+		
 	})
 	
 })
