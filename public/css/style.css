@@ -19,3 +19,7 @@ background-color: #eee0ee;
 .low{
 	background-color: #e0e7ee;
 }
+
+#moreInfo {
+	display: none;
+}

@@ -1,7 +1,7 @@
-<%include ../partials/header %>
+<%include ../partials/headerSearch %>
 <a href="/search">New Search</a>
 <a class="twitter-timeline" href="https://twitter.com/search?q=%23recall%20food" data-widget-id="614247041103872000">Tweets about food #recall(s)</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<!--<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>-->
 	<% recalls.forEach(function(recall){%>
 		
 	
@@ -18,23 +18,27 @@
 		<%} %>
 
 			<p>What: <%= recall.product_description %></p>
-			<p>Why:	<%= recall.reason_for_recall %></p>
-			<p>Recalled from: <%= recall.distribution_pattern %>.</p>
 			<p>By whom: <%= recall.recalling_firm %></p>
 			<p id="recency">When: <%= recall.report_date %></p>
-			<p>Classification: <%= recall.classification %></p>
-		
-			<form id="addFood" action="/recalls/<%= recall.id %>" >
 
-				<input type="hidden" name="recall[desc]" value=<%= recall.product_description %>> 
-				<input type="hidden" name="recall[reason]" value=<%=recall.reason_for_recall%>> 
-				<input type="hidden" name="recall[dist]" value=<%=recall.distribution_pattern%>> 
-				<input type="hidden" name="recall[firm]" value=<%=recall.recalling_firm%>> 
-			  <input type="hidden" name="recall[date]" value	=<%=recall.report_date%>> 
-			  <input type="hidden" name="recall[class]" value	=<%=recall.classification%>> 
-				<input type="submit" value="View Distribution on Map">
+			<form id="showMore" action="javascript:void(0)" >
+				<input type="hidden" name="recall[desc]" value="<%= recall.product_description %>"> 
+				<input type="hidden" name="recall[reason]" value="<%=recall.reason_for_recall%>"> 
+				<input type="hidden" name="recall[dist]" value="<%=recall.distribution_pattern%>" >
+				<input type="hidden" name="recall[firm]" value="<%=recall.recalling_firm%>"> 
+			  <input type="hidden" name="recall[date]" value	="<%=recall.report_date%>"> 
+			  <input type="hidden" name="recall[class]" value	="<%=recall.classification%>"> 
+				<input type="submit" value="More Info">
 				
 			</form>
+			</div>
+			<div id="moreInfo">
+			<p>Why: <%= recall.reason_for_recall %></p>
+			<p>Recalled from: <%= recall.distribution_pattern %>.</p>
+ 			<p>Risk Classification: <%= recall.classification %></p>
+ 		</div>
+	
+			</div>
 					<hr>
 		<% }) %>
 	</div>

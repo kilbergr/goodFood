@@ -18,6 +18,7 @@ $(document).ready(function(){
 // 	format: "yyyy-mm-dd"
 // });
 
+//Show submission form on radio
 $('#searchForm').submit(function(event){
 	event.preventDefault();
 	var val =  radioValue();
@@ -36,7 +37,7 @@ $('#searchForm').submit(function(event){
 		//for searching by date range
 		else if (val === 'date'){
 			var html = '<div><form id="newDateSearch" action="/recalls" method="POST">' +
-			//Trying with datepicker
+			//Trying datepicker
 			//'<label for="inReason">Beginning of Range: <input type="text" name="test" id="dateBegin"></label>'
 		  //'<label for="inReason">Beginning of Range: <input type="text" name="recall[dateBegin]" id="dateBegin" placeholder="YYYY-MM-DD">'
 			'<label for="inReason">Beginning of Range: <input type="text" name="recall[dateBegin]" id="dateBegin" autofocus placeholder="YYYY-MM-DD">' +
@@ -45,10 +46,25 @@ $('#searchForm').submit(function(event){
 		}
 		else {
 			alert('Please choose a search type');
-
-		}
-		
+		}	
 	$('#searchForm').after(html + '<input type="submit" value="Find recalls"></div></form>');
+
+   
+	});
+
+//show more info on request
+$('#showMore').submit(function(e){
+	e.preventDefault();
+	var infoHTML = '<div>$('#showMore').after(infoHTML);		
+
+})
+
+$.get('/recalls').done(function(data){
+	console.log(data);
+	alert(data.'#showMore');
+})
+
+
 	// $(divSubmit).submit(function(e) {
  //      e.preventDefault();
  //      //add info to recallQuery obj from form
@@ -69,9 +85,6 @@ $('#searchForm').submit(function(event){
       //    $('#searchForm').remove();
 
       // });
-   
-	});
-
 
 //Google Maps Section
 //styling
