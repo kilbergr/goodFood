@@ -25,9 +25,9 @@ background-color: #eee0ee;
 }
 
 #map-canvas {
-	width: 40%
+	width: 100%;
 	float: right;
-	margin-top: -150px;
+	/*margin-top: -150px;*/
 	height: 400px;
 }
 

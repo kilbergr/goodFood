@@ -48,14 +48,27 @@ $('#searchForm').submit(function(event){
 			alert('Please choose a search type');
 		}	
 	$('#searchForm').after(html + '<input type="submit" value="Find recalls"></div></form>');
-  
 	});
+
+//parsing strings of distribution patterns to find state names (in array)
+ var findState = function(str, arr){
+ 	var distStates = [];
+ 	for (var i = 0; i < arr.length; i++){
+ 		if(str.indexOf(arr[i])!= -1){
+ 			distStates.push(arr[i]);
+ 		};
+ 	}
+ 	console.log(distStates);
+ };
+
+stateNames = ["Nationwide", "USA", "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming", "District of Columbia", "Puerto Rico", "Guam", "American Samoa", "U.S. Virgin Islands", "Northern Mariana Islands", "AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA","MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"]; 
 
 //show more info on request
 $('#showMore').submit(function(e){
 	e.preventDefault();
 	$('#moreInfo').css('display', 'block');
-
+	var dist = $(".distribution_pattern").val();
+	findState(dist, stateNames);
 	
 })
 
@@ -65,6 +78,9 @@ $('#showLess').submit(function(e){
 	$('#moreInfo').css('display', 'none');
 })
 
+
+
+//saving the recall info in your recalls database with AJAX 
 $('#saveRecall').submit(function(e){
 	e.preventDefault();
 	var reason_for_recall = $(".reason_for_recall").val();
@@ -85,8 +101,7 @@ $('#saveRecall').submit(function(e){
        });
 })
 
-//parsing strings of distribution patterns to find state names
- 
+
 
 
 //Google Maps Section
@@ -120,7 +135,7 @@ $('#saveRecall').submit(function(e){
 
   var styledMap = new google.maps.StyledMapType(styles,
     {name: "Styled Map"});
-
+//centering on US
  var mapOptions = {
       zoom: 3,
       center: {lat: 40.7033127, lng: -90.979681},
@@ -136,10 +151,10 @@ $('#saveRecall').submit(function(e){
 
     var mapDiv = document.getElementById('map-canvas');
      
+     //will add event for click on more info
       google.maps.event.addListener(map, 'click', function(event) {
-      addMarker(event.latLng);
-     // google.maps.event.addDomListener(window, 'load', initialize);
-    });
+     //show locations mentioned
+     });
   }
 initialize();
 //google.maps.event.trigger(map, 'resize');
