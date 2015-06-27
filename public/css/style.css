@@ -25,8 +25,25 @@ background-color: #eee0ee;
 }
 
 #map-canvas {
-	height: 300px;
 	width: 400px;
 	float: right;
 	margin-top: -150px;
+}
+
+.mapSide {
+	  float:right; 
+    width: 40%;
+    
+    /*height: 100%;*/
+}
+
+.scrollSide {
+		float: left;
+		
+    height: 400px;
+    width: 60%;
+}
+
+.wrap {
+width: 100%;
 }

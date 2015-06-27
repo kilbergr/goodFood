@@ -55,7 +55,7 @@ $('#searchForm').submit(function(event){
 $('#showMore').submit(function(e){
 	e.preventDefault();
 	$('#moreInfo').css('display', 'block');
-	google.maps.event.trigger(map, 'resize');
+	
 })
 
 //show less info on request
@@ -146,6 +146,7 @@ var map,
   }
 google.maps.event.addDomListener(window, 'load', initialize);
 initialize();
+google.maps.event.trigger(map, 'resize');
 // google.maps.event.trigger($("#map-canvas")[0], 'resize');
  });
 

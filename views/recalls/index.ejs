@@ -1,8 +1,7 @@
 <%include ../partials/headerSearch %>
+<div class="wrap">
 <a href="/search">New Search</a>
-<!-- <a class="twitter-timeline" href="https://twitter.com/search?q=%23recall%20food" data-widget-id="614247041103872000">Tweets about food #recall(s)</a> -->
-<!--<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>-->
-	
+	<div class="scrollSide">
 	<% recalls.forEach(function(recall){%>
 		
 	
@@ -34,7 +33,7 @@
 			</form>
 
 			<div id="moreInfo">
-				<div id="map-canvas"></div>
+				
 				<!-- <button onclick="displayMap()">Show Map</button> -->
 			<p>Why: <%= recall.reason_for_recall %></p>
 			<p>Recalled from: <%= recall.distribution_pattern %>.</p>
@@ -43,12 +42,17 @@
  			<form id="showLess" action="javascript:void(0)"><input type="submit" value="Less Info"></form>
 			<form id ="saveRecall" action="/myRecalls" method="POST"><input type="submit" value="Save to My Recalls"></form>
  		</div>
-
-	
 			<hr>
-				
-		
 	</div>
 	<% }) %>
-	
+	</div>
+	<div class="mapSide">
+	<div id="map-canvas"></div>
+
+	<a class="twitter-timeline" href="https://twitter.com/search?q=%23recall%20food" data-widget-id="614247041103872000">Tweets about food #recall(s)</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+
+	 </div>
+
 <%include ../partials/footer %>
