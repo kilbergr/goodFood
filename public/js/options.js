@@ -66,7 +66,14 @@ $('#showLess').submit(function(e){
 
 $('#saveRecall').submit(function(e){
 	e.preventDefault();
-	var data = {myRecall: {reason_for_recall: reason_for_recall, product_description: product_description, distribution_pattern: distribution_pattern}};
+	var reason_for_recall = $(".reason_for_recall").val();
+	var product_description = $(".product_description").val();
+	var distribution_pattern = $(".distribution_pattern").val();
+	var recalling_firm = $(".recalling_firm").val();
+	var classification = $(".classification").val();
+	var report_date = $(".report_date").val();
+	var data = {myRecall: {reason_for_recall: reason_for_recall, product_description: product_description, distribution_pattern: distribution_pattern, classification:classification, recalling_firm:recalling_firm, report_date:report_date}};
+	console.log(data);
 	 $.ajax({	
         type: 'POST',
         url: '/myRecalls',
@@ -79,17 +86,12 @@ $('#saveRecall').submit(function(e){
 
   function saveRecall() {
     $.getJSON("/myRecalls").done(function(data) {
-        data.myRecalls.forEach(function(myRecall) {
-            var html = recallHTML(myRecall);
-        });
+      console.log(data);
+    }).fail(function(err){
+    	console.log(err.responseText);
     });
   }
 
-  function recallHTML(myRecall) {
-    return '<div data-id="' + myRecall._id + '"><p><a href="/myRecalls/' + myRecall._id + '/">' + myRecall.product_description + 
-           '</a></p><p>Reason: ' + myRecall.reason_for_recall + ', Distribution Pattern: ' + myRecall.distribution_pattern + '</p>' +
-           '<hr></div>';
-     }
 
 saveRecall();
 

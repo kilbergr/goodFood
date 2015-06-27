@@ -38,6 +38,7 @@ app.get('/recalls', function(req, res){
 		}
 		else{
 		  var recalls = JSON.parse(body).results;
+		  console.log(recalls[0]);
 			res.render('recalls/index', {recalls:recalls});
 		}
 	})
@@ -80,7 +81,8 @@ app.post('/recalls', function(req, res){
 
 //to view personal database
 app.get('/myRecalls', function(req,res){
-  db.myRecall.find({}, function(err,myRecalls){
+  db.MyRecall.find({}, function(err,myRecalls){
+  	console.log(myRecalls);
           res.format({ 
         'text/html': function(){
           res.render("myRecalls/index", {myRecalls:myRecalls});
@@ -97,6 +99,7 @@ app.get('/myRecalls', function(req,res){
 //to add to personal database
 app.post('/myRecalls', function(req,res){
   var myRecall = new db.MyRecall(req.body.myRecall);
+  console.log(req.body.myRecall);
 	myRecall.save(function(err,myRecall) {
       	res.format({
         'text/html': function(){
