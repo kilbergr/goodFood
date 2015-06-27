@@ -55,6 +55,7 @@ $('#searchForm').submit(function(event){
 $('#showMore').submit(function(e){
 	e.preventDefault();
 	$('#moreInfo').css('display', 'block');
+
 	
 })
 
@@ -84,21 +85,13 @@ $('#saveRecall').submit(function(e){
        });
 })
 
-  function saveRecall() {
-    $.getJSON("/myRecalls").done(function(data) {
-      console.log(data);
-    }).fail(function(err){
-    	console.log(err.responseText);
-    });
-  }
+//parsing strings of distribution patterns to find state names
+ 
 
 
-saveRecall();
-
-     
 //Google Maps Section
 //styling
-var map,
+  var map,
   markers =[];
   function initialize() {
 
@@ -127,10 +120,10 @@ var map,
 
   var styledMap = new google.maps.StyledMapType(styles,
     {name: "Styled Map"});
-//beginning view--for some reason has to be weirdly centered to show US
+
  var mapOptions = {
       zoom: 3,
-      center: {lat: 55.8282, lng: -128.5795},
+      center: {lat: 40.7033127, lng: -90.979681},
        mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
       }
@@ -143,11 +136,17 @@ var map,
 
     var mapDiv = document.getElementById('map-canvas');
      
+      google.maps.event.addListener(map, 'click', function(event) {
+      addMarker(event.latLng);
+     // google.maps.event.addDomListener(window, 'load', initialize);
+    });
   }
-google.maps.event.addDomListener(window, 'load', initialize);
 initialize();
-google.maps.event.trigger(map, 'resize');
+//google.maps.event.trigger(map, 'resize');
 // google.maps.event.trigger($("#map-canvas")[0], 'resize');
+ 
+
+
  });
 
 

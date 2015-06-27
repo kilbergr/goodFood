@@ -25,9 +25,10 @@ background-color: #eee0ee;
 }
 
 #map-canvas {
-	width: 400px;
+	width: 40%
 	float: right;
 	margin-top: -150px;
+	height: 400px;
 }
 
 .mapSide {
