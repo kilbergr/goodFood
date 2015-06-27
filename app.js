@@ -16,6 +16,21 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.use(morgan('tiny'));
 
+
+	//parsing strings of distribution patterns to find state names (in array)
+ var findState = function(str, arr){
+ 	var upCased = str.toUpperCase();
+ 	var distStates = [];
+ 	for (var i = 0; i < arr.length; i++){
+ 		if(upCased.indexOf(arr[i])!= -1){
+ 			distStates.push(arr[i]);
+ 		};
+ 	}
+ 	console.log(distStates);
+ };
+
+stateNames = ["NATIONALLY", "NATIONWIDE", "NATIONAL", "USA", "ALABAMA", "ALASKA", "ARIZONA", "ARKANSAS", "CALIFORNIA", "COLORADO", "CONNECTICUT", "DELAWARE", "FLORIDA", "GEORGIA", "HAWAII", "IDAHO", "ILLINOIS", "INDIANA", "IOWA", "KANSAS", "KENTUCKY", "LOUISIANA", "MAINE", "MARYLAND", "MASSACHUSETTS", "MICHIGAN", "MINNESOTA", "MISSISSIPPI", "MISSOURI", "MONTANA", "NEBRASKA", "NEVADA", "NEW HAMPSHIRE", "NEW JERSEY", "NEW MEXICO", "NEW YORK", "NORTH CAROLINA", "NORTH DAKOTA", "OHIO", "OKLAHOMA", "OREGON", "PENNSYLVANIA", "RHODE ISLAND", "SOUTH CAROLINA", "SOUTH DAKOTA", "TENNESSEE", "TEXAS", "UTAH", "VERMONT", "VIRGINIA", "WASHINGTON", "WEST VIRGINIA", "WISCONSIN", "WYOMING", "DISTRICT OF COLUMBIA", "PUERTO RICO", "GUAM", "AMERICAN SAMOA", "U.S. VIRGIN ISLANDS", "NORTHERN MARIANA ISLANDS", "AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA","MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"]; 
+
 app.get('/', function(req, res){
 	res.redirect('/search')
 });
@@ -39,6 +54,10 @@ app.get('/recalls', function(req, res){
 		else{
 		  var recalls = JSON.parse(body).results;
 		  console.log(recalls[0]);
+		  recalls.forEach(function(recall){
+		 		var add = recall.distribution_pattern;
+				findState(add, stateNames);
+	  })
 			res.render('recalls/index', {recalls:recalls});
 		}
 	})
@@ -74,6 +93,13 @@ app.post('/recalls', function(req, res){
 	else{
 		console.log(response.statusCode);
 	  var recalls = JSON.parse(body).results;
+	  recalls.forEach(function(recall){
+	  	var add = new RegExp(recall.distribution_pattern);
+	  	console.log(add);
+	  })
+
+
+
 		res.render('recalls/index', {recalls:recalls});
 	}
 	})
