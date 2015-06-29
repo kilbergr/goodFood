@@ -1,8 +1,16 @@
 <% include ../partials/header %>
-<h1>Recalls You've Saved:</h1>
-<% myRecalls.forEach(function(myRecall){%>
+<h2>Recalls you've saved:</h2>
+<a href="/search">New Search</a>
+<% myRecalls.forEach(function(myRecall){ %>
+<p><strong><%= myRecall.product_description %></strong></p>
 
-<p>What: <%= myRecall.product_description %></p>
-			<p>By whom: <%= myRecall.recalling_firm %></p>
-			<p id="recency">When: <%= myRecall.report_date %></p>
+<p>Where this product was distributed: <%=  myRecall.distribution_pattern %></p>
+<form action="/myRecalls/<%= myRecall.id %>?_method=delete" method="POST">
+<input type="submit" value="Delete">
+</form>
+<hr>
+	<% }) %>
+
+
+
 <% include ../partials/footer %>

@@ -18,7 +18,7 @@ background-color: #eee0ee;
 	background-color: #e0e7ee;
 }
 
-.moreInfo {
+#moreInfo {
 	display: none;
 }
 
@@ -27,6 +27,7 @@ background-color: #eee0ee;
 	width: 100%;
 	float: right;
 	height: 400px;
+    margin-top: 15px;
 }
 
 .mapSide {

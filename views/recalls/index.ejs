@@ -1,12 +1,15 @@
 <%include ../partials/headerSearch %>
 
-<div class="heading"><a href="/search">New Search</a></div>
+<div class="heading">
+
+	<div><h2>Relevant Recalls</h2></div>
+	<div align="left"><button><a href="/search">New Search</a></button></div>
+</div>
 	<div class="wrap">
 	
 	<div class="scrollSide">
 	<% recalls.forEach(function(recall){%>
 		
-	
 		<!-- What to display -->
 		<% if(recall.classification==='Class I'){%>
 			<div class="high">
@@ -34,7 +37,7 @@
 				
 			</form>
 
-			<div class="moreInfo">
+			<div id="moreInfo">
 				
 			<p>Why: <%= recall.reason_for_recall %></p>
 			<p>Recalled from: <%= recall.distribution_pattern %>.</p>

@@ -26,8 +26,11 @@ app.use(morgan('tiny'));
  			distStates.push(arr[i]);
  		};
  	}
- 	console.log(distStates);
+ //	console.log(distStates);
+
  };
+
+
 
 stateNames = ["NATIONALLY", "NATIONWIDE", "NATIONAL", "USA", "ALABAMA", "ALASKA", "ARIZONA", "ARKANSAS", "CALIFORNIA", "COLORADO", "CONNECTICUT", "DELAWARE", "FLORIDA", "GEORGIA", "HAWAII", "IDAHO", "ILLINOIS", "INDIANA", "IOWA", "KANSAS", "KENTUCKY", "LOUISIANA", "MAINE", "MARYLAND", "MASSACHUSETTS", "MICHIGAN", "MINNESOTA", "MISSISSIPPI", "MISSOURI", "MONTANA", "NEBRASKA", "NEVADA", "NEW HAMPSHIRE", "NEW JERSEY", "NEW MEXICO", "NEW YORK", "NORTH CAROLINA", "NORTH DAKOTA", "OHIO", "OKLAHOMA", "OREGON", "PENNSYLVANIA", "RHODE ISLAND", "SOUTH CAROLINA", "SOUTH DAKOTA", "TENNESSEE", "TEXAS", "UTAH", "VERMONT", "VIRGINIA", "WASHINGTON", "WEST VIRGINIA", "WISCONSIN", "WYOMING", "DISTRICT OF COLUMBIA", "PUERTO RICO", "GUAM", "AMERICAN SAMOA", "U.S. VIRGIN ISLANDS", "NORTHERN MARIANA ISLANDS", "AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA","MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"]; 
 
@@ -143,13 +146,25 @@ app.post('/myRecalls', function(req,res){
 
 
 
-app.get('/recalls/:id', function(req, res){
-	db.Recall.findById(req.params.id, function(err,recall){
-    res.render("recalls/show", {recall:recall});
+app.get('/myRecalls/:id', function(req, res){
+	db.MyRecall.findById(req.params.id, function(err,myRecall){
+    res.render("myRecalls/show", {myRecall:myRecall});
   });
 })
 
-app.post('/recalls/:id')
+app.delete('/myRecalls/:id', function(req, res){
+	db.MyRecall.findByIdAndRemove(req.params.id, function(err, myRecall){
+		if(err){
+			//TODO with error
+
+			console.log(err);
+			res.render('myRecalls/show')
+		}
+		else{
+			res.redirect('/myRecalls');
+		}
+	})
+})
 
 app.listen(8080, function(){
 	console.log("listening on 8080");

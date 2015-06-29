@@ -50,18 +50,43 @@ $('#searchForm').submit(function(event){
 	$('#searchForm').after(html + '<input type="submit" value="Find recalls"></div></form>');
 	});
 
+	//parsing strings of distribution patterns to find state names (in array)
+ var findState = function(str, arr){
+ 	var upCased = str.toUpperCase();
+ 	var words = upCased.split(" ");
+ 	var distStates = [];
+ 	for (var i = 0; i < arr.length; i++){
+ 		for (var j = 0; j < words.length; j++){
+ 			if(words[j].indexOf(arr[i])!= -1){
+ 			distStates.push(arr[i]);
+ 			};
+ 		}
+
+ 	}
+	console.log(distStates);
+
+ };
+
+
+
+stateNames = ["NATIONALLY", "NATIONWIDE", "NATIONAL", "USA", "ALABAMA", "ALASKA", "ARIZONA", "ARKANSAS", "CALIFORNIA", "COLORADO", "CONNECTICUT", "DELAWARE", "FLORIDA", "GEORGIA", "HAWAII", "IDAHO", "ILLINOIS", "INDIANA", "IOWA", "KANSAS", "KENTUCKY", "LOUISIANA", "MAINE", "MARYLAND", "MASSACHUSETTS", "MICHIGAN", "MINNESOTA", "MISSISSIPPI", "MISSOURI", "MONTANA", "NEBRASKA", "NEVADA", "NEW HAMPSHIRE", "NEW JERSEY", "NEW MEXICO", "NEW YORK", "NORTH CAROLINA", "NORTH DAKOTA", "OHIO", "OKLAHOMA", "OREGON", "PENNSYLVANIA", "RHODE ISLAND", "SOUTH CAROLINA", "SOUTH DAKOTA", "TENNESSEE", "TEXAS", "UTAH", "VERMONT", "VIRGINIA", "WASHINGTON", "WEST VIRGINIA", "WISCONSIN", "WYOMING", "DISTRICT OF COLUMBIA", "PUERTO RICO", "GUAM", "AMERICAN SAMOA", "U.S. VIRGIN ISLANDS", "NORTHERN MARIANA ISLANDS", "AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA","MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"]; 
+
 
 //show more info on request
-$('.showMore').submit(function(e){
+$('.showMore').on("click", function(e){
 	e.preventDefault();
-	$('.moreInfo').css('display', 'block');
-	
+	$('#moreInfo').css('display', 'block');
+	findState($(".distribution_pattern").val(), stateNames);
+	// var data = {place: {}};
+ //   data.place.address = $('#address').val();
+ //   data.place.lat = $('#lat').val();
+ //   data.place.long = $('#long').val();
 })
 
 //show less info on request
-$('.showLess').submit(function(e){
+$('.showLess').on("click", function(e){
 	e.preventDefault();
-	$('.moreInfo').css('display', 'none');
+	$('#moreInfo').css('display', 'none');
 })
 
 
@@ -138,8 +163,9 @@ $('.saveRecall').submit(function(e){
     var mapDiv = document.getElementById('map-canvas');
      
      //will add event for click on more info
-      google.maps.event.addListener(map, 'click', function(event) {
+      google.maps.event.trigger('.showMore', 'click', function(event) {
      //show locations mentioned
+     console.log("map event");
      });
   }
 initialize();
