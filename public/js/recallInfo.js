@@ -39,8 +39,7 @@ $('.showMore').on("click", function(e){
 //show less info on request
 $('.showLess').on("click", function(e){
     e.preventDefault();
-    $(this).next('moreInfo').css('display', 'none');
-    var pattern = $(this).children('.distribution_pattern').val();
+    $(this).parent('.moreInfo').css('display', 'none');
     removeMarkers(markers);
 })
 
