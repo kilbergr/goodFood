@@ -56,7 +56,7 @@ app.get('/recalls', function(req, res){
 		  console.log(recalls[0]);
 		  recalls.forEach(function(recall){
 		 		var add = recall.distribution_pattern;
-				findState(add, stateNames);
+				var states = findState(add, stateNames);
 	  })
 			res.render('recalls/index', {recalls:recalls});
 		}

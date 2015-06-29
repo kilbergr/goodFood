@@ -2,12 +2,9 @@ body{
 	background-color: #E0EEEE;
 	font-family: 'Tahoma';
 	font-size: 18px;
-	margin-left: 10px;
-}
-
-#classification{
-	background-color: red;
-}
+	 padding: 0;
+    margin: 10;
+  }
 
 .high{
 background-color: #eee0ee;
@@ -20,7 +17,7 @@ background-color: #eee0ee;
 	background-color: #e0e7ee;
 }
 
-#moreInfo {
+.moreInfo {
 	display: none;
 }
 
@@ -33,18 +30,43 @@ background-color: #eee0ee;
 
 .mapSide {
 	  float:right; 
-    width: 40%;
+	  width: 25rem;
+ /*   width: 40%;*/
+    overflow: auto;
+    height: auto;
+    padding: .5rem;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
     
     /*height: 100%;*/
 }
 
 .scrollSide {
 		float: left;
-		
-    height: 400px;
-    width: 60%;
+		overflow: auto;
+		  flex: 1;
+    /*height: auto;*/
+    padding: .5rem;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    height: auto;
+    /*width: 60%;*/
+}
+
+
+.scrollSide::-webkit-scrollbar,
+.mapSide::-webkit-scrollbar {
+    display: none;
 }
 
 .wrap {
-width: 100%;
+		width: 100%;
+ 		display: flex;
+    overflow: hidden;
+    height: 100vh;
+    margin-top: -100px;
+    padding-top: 100px;
+    position: relative;
+    backface-visibility: hidden;
+    will-change: overflow;
 }

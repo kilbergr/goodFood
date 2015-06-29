@@ -52,24 +52,22 @@ $('#searchForm').submit(function(event){
 
 
 //show more info on request
-$('#showMore').submit(function(e){
+$('.showMore').submit(function(e){
 	e.preventDefault();
-	$('#moreInfo').css('display', 'block');
-	//var dist = $(".distribution_pattern").val();
-	
+	$('.moreInfo').css('display', 'block');
 	
 })
 
 //show less info on request
-$('#showLess').submit(function(e){
+$('.showLess').submit(function(e){
 	e.preventDefault();
-	$('#moreInfo').css('display', 'none');
+	$('.moreInfo').css('display', 'none');
 })
 
 
 
 //saving the recall info in your recalls database with AJAX 
-$('#saveRecall').submit(function(e){
+$('.saveRecall').submit(function(e){
 	e.preventDefault();
 	var reason_for_recall = $(".reason_for_recall").val();
 	var product_description = $(".product_description").val();
