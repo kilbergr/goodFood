@@ -4,6 +4,7 @@ db = require("./models"),
 bodyParser = require("body-parser"),
 methodOverride = require("method-override"),
 morgan = require("morgan"),
+favicon = require("serve-favicon"),
 request = require("request");
 //using dotenv to hide APIs
 require('dotenv').load();
@@ -15,6 +16,7 @@ app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.use(morgan('tiny'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 
 
 	//parsing strings of distribution patterns to find state names (in array)
