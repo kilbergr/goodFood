@@ -2,10 +2,11 @@ body{
 	background-color: #E0EEEE;
 	font-family: 'Tahoma';
 	font-size: 18px;
-	 padding: 0;
-    margin: 10;
+	padding: 0;
+  margin: 0;
+  overflow-x: hidden;
   }
-
+/*Styling for different classes of danger*/
 .high{
 background-color: #eee0ee;
 }
@@ -21,10 +22,10 @@ background-color: #eee0ee;
 	display: none;
 }
 
+/*styling for multiple scrolls*/
 #map-canvas {
 	width: 100%;
 	float: right;
-	/*margin-top: -150px;*/
 	height: 400px;
 }
 
@@ -59,14 +60,25 @@ background-color: #eee0ee;
     display: none;
 }
 
+.heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #E0EEEE;
+    position: relative;
+    z-index: 10;
+    height: 100px;
+}
+
 .wrap {
-		width: 100%;
- 		display: flex;
+	  display: flex;
     overflow: hidden;
     height: 100vh;
     margin-top: -100px;
     padding-top: 100px;
     position: relative;
+    width: 100%;
     backface-visibility: hidden;
     will-change: overflow;
+
 }
