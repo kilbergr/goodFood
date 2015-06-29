@@ -22,7 +22,6 @@
     }
 
   }
-  console.log(distStates);
  return distStates;
 };
 
@@ -33,7 +32,7 @@ $('.showMore').on("click", function(e){
 	var distStates = findState($(".distribution_pattern").val(), stateNames);
   distStates.forEach(function(state){
     addMarkers(state);
-  })
+  });
 })
 
 //show less info on request
@@ -41,11 +40,8 @@ $('.showLess').on("click", function(e){
 	e.preventDefault();
 	$('#moreInfo').css('display', 'none');
   var distStates = findState($(".distribution_pattern").val(), stateNames);
-  distStates.forEach(function(state){
-    removeMarkers(state);
-  })
+  removeMarkers(markers);
 })
-
 
 
 //saving the recall info in your recalls database with AJAX 
@@ -58,7 +54,7 @@ $('.saveRecall').submit(function(e){
 	var classification = $(".classification").val();
 	var report_date = $(".report_date").val();
 	var data = {myRecall: {reason_for_recall: reason_for_recall, product_description: product_description, distribution_pattern: distribution_pattern, classification:classification, recalling_firm:recalling_firm, report_date:report_date}};
-	console.log(data);
+	// console.log(data);
   $.ajax({	
     type: 'POST',
     url: '/myRecalls',
@@ -109,20 +105,14 @@ var mapOptions = {
     mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
   }
 };
-map = new google.maps.Map(document.getElementById('map-canvas'),
-  mapOptions);
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+    mapOptions);
 
-map.mapTypes.set('map_style', styledMap);
-map.setMapTypeId('map_style');
+  map.mapTypes.set('map_style', styledMap);
+  map.setMapTypeId('map_style');
 
-var mapDiv = document.getElementById('map-canvas');
-
-     //will add event for click on more info
-     google.maps.event.trigger('.showMore', 'click', function(event) {
-     //show locations mentioned
-     console.log("map event");
-   });
-   }
+  var mapDiv = document.getElementById('map-canvas');
+  }
 
 //addMarker function
 var addMarkers = function(obj){
@@ -134,22 +124,20 @@ var addMarkers = function(obj){
         draggable: true,
         map: map
     });
-  myMarkers.push(marker);
-  return myMarkers;
+  markers.push(marker);
+  return markers;
 };
-
+//removeMarker function
 var removeMarkers = function(arr){
    for (var k = 0; k < arr.length; k++) {
      arr[k].setMap(null);
   }
 };
 
-   initialize();
-//google.maps.event.trigger(map, 'resize');
-// google.maps.event.trigger($("#map-canvas")[0], 'resize');
+initialize();
 });
 
-
+//states and their longitudes/latitudes
  var stateNames = [
     {
         "name": "Alabama",

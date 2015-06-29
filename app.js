@@ -106,37 +106,6 @@ app.post('/recalls', function(req, res){
 	else{
 		console.log(response.statusCode);
 	  var recalls = JSON.parse(body).results;
-	  recalls.forEach(function(recall){
-	  	var add = new RegExp(recall.distribution_pattern);
-	  	//console.log(add);
-	  	//find the states that appear in the distribution list
-	  //	var distStates = findState(add, stateNames);
-	  	//find the google maps api URL for each state
-	//		var apiUrl = mapStates(distStates);
-			//make a request using that api URL
-			 // request(apiUrl, function(error, response, body) {
-    //     if (error) {
-    //       res.status(500).send('Server Error');
-    //     } 
-    //     else if (!error && response.statusCode === 200) {
-    //       var data = JSON.parse(body);
-    //       var state = {};
-    //       if (data.results && data.results.length >= 1 &&
-    //           data.results[0].geometry && data.results[0].geometry.location) {
-    //         state.lat = data.results[0].geometry.location.lat;
-    //         state.long = data.results[0].geometry.location.lng;
-    //         //WHAT TO DO NOW???
-    //         console.log(state);
-
-    //       } else {
-    //         res.status(422).send('Place not found');
-    //       }
-    //     } else {
-    //       res.status(500).send('Server Error');
-    //     }
-    //   });
-    // }
-	 	 })
 		res.render('recalls/index', {recalls:recalls});
 		}
 	})
@@ -145,8 +114,7 @@ app.post('/recalls', function(req, res){
 //to view personal database
 app.get('/myRecalls', function(req,res){
   db.MyRecall.find({}, function(err,myRecalls){
-  	console.log(myRecalls);
-          res.format({ 
+    	res.format({ 
         'text/html': function(){
           res.render("myRecalls/index", {myRecalls:myRecalls});
         },
@@ -164,15 +132,15 @@ app.post('/myRecalls', function(req,res){
   var myRecall = new db.MyRecall(req.body.myRecall);
   console.log(req.body.myRecall);
 	myRecall.save(function(err,myRecall) {
-      	res.format({
+     	res.format({
         'text/html': function(){
-          res.render("myRecalls");
+         res.render("myRecalls");
         },
         'application/json': function(){
           res.send({myRecall:myRecall});
         },
         'default': function(){
-          res.status(406).send('Not Acceptable');
+          res.status(404).send('Not Acceptable');
         }
       })
      })
