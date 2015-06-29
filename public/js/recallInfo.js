@@ -27,9 +27,10 @@
 
 //show more info on request
 $('.showMore').on("click", function(e){
-	e.preventDefault();
-	$('#moreInfo').css('display', 'block');
-	var distStates = findState($(".distribution_pattern").val(), stateNames);
+  e.preventDefault();
+  $(this).next('.moreInfo').css('display', 'block');
+  var pattern = $(this).children('.distribution_pattern').val();
+  var distStates = findState(pattern, stateNames);
   distStates.forEach(function(state){
     addMarkers(state);
   });
@@ -38,7 +39,7 @@ $('.showMore').on("click", function(e){
 //show less info on request
 $('.showLess').on("click", function(e){
 	e.preventDefault();
-	$('#moreInfo').css('display', 'none');
+	$('.moreInfo').css('display', 'none');
   var distStates = findState($(".distribution_pattern").val(), stateNames);
   removeMarkers(markers);
 })

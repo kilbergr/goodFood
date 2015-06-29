@@ -1,5 +1,5 @@
 body{
-	background-color: #E0EEEE;
+	background-color: #FFF8D4;
 	font-family: 'Tahoma';
     color: gray;
 	font-size: 18px;
@@ -9,17 +9,21 @@ body{
   }
 /*Styling for different classes of danger*/
 .high{
-background-color: #eee0ee;
+background-color: #FFF8D4;
+border: solid #FFB884 3px;
+margin: 2px;
 }
 
 .mid{
-	background-color: #eee7e0;
+    background-color: #FFF8D4;
+    border: solid #F5DF98 3px;
 }
 .low{
-	background-color: #e0e7ee;
+    background-color: #FFF8D4;
+    border: solid #C0D1C2 3px;
 }
 
-#moreInfo {
+.moreInfo {
 	display: none;
 }
 
@@ -65,10 +69,11 @@ background-color: #eee0ee;
     display: flex;
     /*align-items: center;*/
     /*justify-content: center;*/
-    background-color: #E0EEEE;
+    background-color: #2E4347;
     position: relative;
     z-index: 10;
     height: 100px;
+    color: #FFF8D4;
 }
 
 .wrap {
