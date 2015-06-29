@@ -8,7 +8,7 @@ request = require("request");
 //using dotenv to hide APIs
 require('dotenv').load();
 	//food API
- var foodKey= process.env.DB_food;
+ var foodKey= process.env.DB_FOOD;
 
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
