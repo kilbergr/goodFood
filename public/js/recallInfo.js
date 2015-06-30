@@ -52,7 +52,7 @@ $('.showMore').on("click", function(e){
         addMarkers(state, stateNames);
     });
   }
- else{
+ if(distStateAbbr!==null){
     distStateAbbr.forEach(function(state){
         addMarkers(state, stateNames);
     });
