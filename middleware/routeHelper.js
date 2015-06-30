@@ -10,7 +10,7 @@ var routeHelpers = {
     }
   },
 
-  ensureCorrectPoster: function(req, res, next) {
+  ensureCorrectRecaller: function(req, res, next) {
     db.Post.findById(req.params.id, function(err,post){
       if (post.user != req.session.id) {
         res.redirect('/posts');

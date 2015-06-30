@@ -143,26 +143,45 @@ app.post('/recalls', function(req, res){
 });
 
 //to view personal database
-app.get('/myRecalls', function(req,res){
+app.get('/myRecalls', routeMiddleware.ensureLoggedIn, function(req,res){
   db.MyRecall.find({}, function(err,myRecalls){
-    	res.format({ 
-        'text/html': function(){
-          res.render("myRecalls/index", {myRecalls:myRecalls});
-        },
-        'application/json': function(){
-          res.send({myRecalls:myRecalls});
-        },
-        'default': function(){
-          res.status(404).send('Not Acceptable');
-        }
-      })
+  		req.currentUser(function(err,user){
+  			if(err){
+  				console.log(err);
+  				res.render('recalls/index')
+  			}
+  			else {
+  				res.format({ 
+  					'text/html': function(){
+  						res.render("myRecalls/index", {myRecalls:myRecalls});
+  					},
+  					'application/json': function(){
+  						res.send({myRecalls:myRecalls});
+  					},
+  					'default': function(){
+  						res.status(404).send('Not Acceptable');
+  					}
+			    })
+  			}
     });
 });
+
 //to add to personal database
-app.post('/myRecalls', function(req,res){
+app.post('/myRecalls', routeMiddleware.ensureLoggedIn, function(req,res){
   var myRecall = new db.MyRecall(req.body.myRecall);
   console.log(req.body.myRecall);
 	myRecall.save(function(err,myRecall) {
+		if(err){
+			console.log(err);
+			res.render('myRecalls/index');
+		}
+		else{
+			req.currentUser(function(err,user){
+			//add user to saved recall
+			myRecall.user = user._id;
+			//user.myRecalls.push(myRecall);
+			myRecall.save();
+			//user.save();
      	res.format({
         'text/html': function(){
          res.render("myRecalls");
@@ -173,31 +192,41 @@ app.post('/myRecalls', function(req,res){
         'default': function(){
           res.status(404).send('Not Acceptable');
         }
-      })
+       })
      })
+		}
+	})
 });
 
 
 app.get('/myRecalls/:id', function(req, res){
-	db.MyRecall.findById(req.params.id, function(err,myRecall){
-    res.render("myRecalls/show", {myRecall:myRecall});
-  });
-})
+	db.MyRecall.findById(req.params.id)
+		.populate('comments')
+		.exec(function(err,myRecall){
+			if(err){
+				console.log(err);
+				res.render('myRecalls/index');
+			}
+			else{
+				 res.render("myRecalls/show", {myRecall:myRecall});
+			}
+    });
+	});
 
-app.delete('/myRecalls/:id', function(req, res){
+app.delete('/myRecalls/:id', routeMiddleware.ensureLoggedIn, routeMiddleware.ensureCorrectRecaller, function(req, res){
 	db.MyRecall.findByIdAndRemove(req.params.id, function(err, myRecall){
 		if(err){
 			//TODO with error
-
 			console.log(err);
 			res.render('myRecalls/show')
 		}
 		else{
 			res.redirect('/myRecalls');
 		}
-	})
-})
+	});
+});
 
+//comment routes
 //new
 app.get('/myRecalls/:myRecall_id/comments/new', routeMiddleware.ensureLoggedIn, function(req, res){
 	req.currentUser(function(err,user){

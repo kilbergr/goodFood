@@ -1,0 +1,25 @@
+<% include ../partials/header %>
+<h2>Comments</h2>
+<%  myRecall.comments.forEach(function(comment) { %>
+	<div>
+		<p><a href="/myRecalls/<%= myRecall.id %>/comments/<%= comment._id %>">
+			<%= comment.content%>
+			</a>
+		</p>
+		<h5>Originally commented on <%= comment.date %> by <%= user.firstName%></h5>
+	
+		<p>
+		<button><a href="/myRecalls/<%= myRecall.id %>">View Recall Information</a></button>
+			<button><a href="/myRecalls/<%= myRecall.id %>/comments/<%= comment._id %>">View comment</a></button>
+
+		</p>
+	<hr>
+</div>
+<% }) %>
+ <a href="/signup">Signup</a>
+ <a href="/login">Login</a>
+  <a href="/logout">Logout</a>
+	<button><a href="/myRecalls/<%= myRecall.id %>/comments/new">New Comment</a></button>
+	<button><a href="/myRecalls">Return to Saved Recalls</a></button>
+
+<% include ../partials/footer %>
