@@ -1,44 +1,12 @@
-body{
+/*body{
 	background-color: #D7E5E4;
 	font-family: 'Georgia';
     color: gray;
 	font-size: 18px;
 	padding: 0;
-  margin: 0;
-  overflow-x: hidden;
-  }
-/*Styling for different classes of danger*/
-.high{
-    /*background-color: #D7E5E4;*/
-    border: solid #b30051 2px;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 3px;
-}
-.high:hover {
-    background-color: #ffaaaa;
-}
-
-.mid{
-    /*background-color: #D7E5E4;*/
-    border: solid #ffa700 2px;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 3px;
-}
-.mid:hover{
-    background-color: #ffd5aa;
-}
-.low{
-    /*background-color: #D7E5E4;*/
-    border: solid #0085ff 2px;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 3px;
-}
-.low:hover{
-    background-color: #aafeff;
-}
+    margin: 0;
+    overflow-x: hidden;
+  }*/
 
 .moreInfo {
 	display: none;
@@ -52,30 +20,29 @@ body{
 }
 
 .mapSide {
-	  float:right; 
-	  width: 35rem;
- /*   width: 40%;*/
+	float:right; 
+	width: 35rem;
     overflow: auto;
     height: auto;
     padding: .5rem;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
+    background-color: #000;
     
     /*height: 100%;*/
 }
 
 .scrollSide {
-		float: left;
-		overflow: auto;
-		  flex: 1;
+	float: left;
+    overflow: auto;
+    flex: 1;
     /*height: auto;*/
     padding: .5rem;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
     height: auto;
-    /*width: 60%;*/
+    background-color: #000;
 }
-
 
 .scrollSide::-webkit-scrollbar,
 .mapSide::-webkit-scrollbar {
@@ -84,30 +51,18 @@ body{
 
 .heading {
     display: flex;
-    background-color: #C6ECEA;
+    background-image: url(http://www.wired.com/wp-content/uploads/images_blogs/wiredscience/2012/05/heikkileis_mould09.jpg);
     z-index: 10;
-    height: 100px;
+    padding-top: -200px;
+    margin-top: -120px;
+    height: 300px;
     color: #BDCFCD;
 }
-/*.headingButtons{
-    float:right;
-    padding: 5px;
-    margin: 5px;
-}*/
 
 .wrap {
 	display: flex;
     overflow: hidden;
-    height: 100vh;
-    margin-top: -100px;
-    padding-top: 100px;
-    /*position: relative;*/
-   /* width: 100%;
-    backface-visibility: hidden;
-    will-change: overflow;*/
-}
-
-.comment {
-    font-size: 10px;
-    font-style: bold;
+    height: 150vh;
+    margin-top: -300px;
+    padding-top: 300px;
 }
