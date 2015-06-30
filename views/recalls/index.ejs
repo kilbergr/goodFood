@@ -1,47 +1,43 @@
 <%include ../partials/headerRecalls %>
 
 <div class="heading">
-
 	<h1>Relevant Recalls</h1>
-
 </div>
+
 <div class="ui four buttons">
 
-			<button class="ui active button"><a href="/search">New Search</a>
-			</button>
+	<button class="ui active button"><a href="/search">New Search</a>
+	</button>
 
-		<button class="ui button">
-			<a href="/myRecalls">Saved Recalls</a>
-		</button>
+	<button class="ui button">
+		<a href="/myRecalls">Saved Recalls</a>
+	</button>
 
-		<button class="ui button">
-			<a href="/login">Login</a>
-		</button>
+	<button class="ui button">
+		<a href="/login">Login</a>
+	</button>
 
-		<button class="ui button">
-			<a href="/signup">Make an Account</a>
-		</button>
+	<button class="ui button">
+		<a href="/signup">Make an Account</a>
+	</button>
+</div>
 
-	</div>
 <div class="wrap">
-	
 	
 	<div class="scrollSide">
 
-	
 	<% recalls.forEach(function(recall){%>
 		<!-- Change the date format -->
 		<% var dateStr = recall.report_date; %>
-<% var match = dateStr.match(/(\d{4})(\d{2})(\d{2})/); %>
-<% var dateFormat = match[2] + '/' + match[3] + '/' + match[1]; %>
+		<% var match = dateStr.match(/(\d{4})(\d{2})(\d{2})/); %>
+		<% var dateFormat = match[2] + '/' + match[3] + '/' + match[1]; %>
 		<!-- What to display-->
 		<!-- Base color off of danger classification -->
 		<% if(recall.classification==='Class I'){%>
 			<div class="high">
-		
 		<%} %>
 		<% if(recall.classification==='Class II'){%>
-	  <div class="mid">
+	  	<div class="mid">
 		<%} %>
 		<% if(recall.classification==='Class III'){%>
 			<div class="low">
