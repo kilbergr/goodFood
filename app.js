@@ -97,11 +97,11 @@ app.get('/recalls', function(req, res){
 		}
 		else{
 		  var recalls = JSON.parse(body).results;
-		  console.log(recalls[0]);
-		  recalls.forEach(function(recall){
-		 		var add = recall.distribution_pattern;
-				var states = findState(add, stateNames);
-	  })
+		  //console.log(recalls[0]);
+		  //recalls.forEach(function(recall){
+		 		//var add = recall.distribution_pattern;
+				//var states = findState(add, stateNames);
+	  //})
 			res.render('recalls/index', {recalls:recalls});
 		}
 	})

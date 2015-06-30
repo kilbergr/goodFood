@@ -1,39 +1,84 @@
  $(document).ready(function(){
 
 	//parsing strings of distribution patterns to find state names (in array)
- var findState = function(str, arr){
- 	var upCased = str.toUpperCase();
- 	var words = upCased.split(" ");
-  words.forEach(function(word){
-    //make word into regexp
-   word = "\b"+word+"\b";
-  })
- 	var distStates = [];
- 	for (var i = 0; i < arr.length; i++){
- 		for (var j = 0; j < words.length; j++){
-      //look for matches for either name or abbreviation of state
-      var name = words[j].indexOf(arr[i].name);
-      var abbr = words[j].indexOf(arr[i].abbreviation);
- 			if(name!== -1 || abbr!== -1){
-        if(distStates.indexOf(name)=== -1 && distStates.indexOf(abbr)===-1){
-            distStates.push(arr[i]);
-        }
-      };
+var makeRegAbbrExp = function(stateArr){
+    var regExpAbbrStr = '';
+    for(var i = 0; i < stateNames.length; i++){
+        if(i < stateNames.length-1){
+            regExpAbbrStr +='(\\b'+stateNames[i].abbreviation+'\\b\)|';
+         }
+        else{
+            regExpAbbrStr +='(\\b'+stateNames[i].abbreviation+'\\b\)';
+          }
     }
+    var reAbbr = RegExp(regExpAbbrStr, 'g') ;
+    return reAbbr;
+}
 
-  }
- return distStates;
-};
+var makeRegNameExp = function(stateArr){
+    var regExpNameStr = '';
+    for(var i = 0; i < stateNames.length; i++){
+        if(i < stateNames.length-1){
+            regExpNameStr +='(\\b'+stateNames[i].name+'\\b\)|';
+        }
+        else{
+            regExpNameStr +='(\\b'+stateNames[i].name+'\\b\)';
+        }
+    }
+    var reName = RegExp(regExpNameStr, 'g');
+    return reName;
+}
+
+//  var findState = function(distString, stateArr){
+//  	// look into case insensitive
+//     var upCased = distString.toUpperCase();
+//  	var stringArr = upCased.split(" ");
+//   stringArr.forEach(function(word){
+//     //make word into regexp
+//    word = "\b"+word+"\b";
+//   })
+//  	var distStates = [];
+//  	for (var i = 0; i < stateArr.length; i++){
+//  		for (var j = 0; j < stringArr.length; j++){
+//       //look for matches for either name or abbreviation of state
+//       var name = stringArr[j].indexOf(stateArr[i].name);
+//       var abbr = stringArr[j].indexOf(stateArr[i].abbreviation);
+//  			if(name!== -1 || abbr!== -1){
+//         if(distStates.indexOf(name)=== -1 && distStates.indexOf(abbr)===-1){
+//             distStates.push(stateArr[i]);
+//         }
+//       };
+//     }
+
+//   }
+//  return distStates;
+// };
+
+var findStateNameRegExp = function(distString, stateArr){
+    var reName = makeRegNameExp(stateArr);
+    var nameMatch = distString.match(reName);
+    return nameMatch; 
+}
+var findStateAbbrRegExp = function(distString, stateArr){
+   var reAbbr = makeRegAbbrExp(stateArr);
+   var abbrMatch = distString.match(reAbbr);
+   return abbrMatch;
+}
 
 //show more info on request
 $('.showMore').on("click", function(e){
+  var allStates = [];
   e.preventDefault();
   $(this).next('.moreInfo').css('display', 'block');
   var pattern = $(this).children('.distribution_pattern').val();
-  var distStates = findState(pattern, stateNames);
-  distStates.forEach(function(state){
-    addMarkers(state);
+  console.log(pattern);
+  var distStateNames = findStateNameRegExp(pattern, stateNames);
+  var distStateAbbr = findStateAbbrRegExp(pattern, stateNames);
+
+  distStateNames.forEach(function(state){
+    addMarkers(state, stateNames);
   });
+
 })
 
 //show less info on request
@@ -115,17 +160,25 @@ var mapOptions = {
   }
 
 //addMarker function
-var addMarkers = function(obj){
-  myLatLng = new google.maps.LatLng(obj.latitude, obj.longitude);
-  var myMarkers = [];
-  var marker = new google.maps.Marker({
-        position: myLatLng,
-        title: obj.name,
-        draggable: true,
-        map: map
-    });
-  markers.push(marker);
-  return markers;
+var addMarkers = function(str, stateArr){
+  stateArr.forEach(function(state){
+    if(state.name===str || state.abbreviation === str || state.alternative === str){
+        myLatLng = new google.maps.LatLng(state.latitude, state.longitude);
+        var myMarkers = [];
+        var marker = new google.maps.Marker({
+             position: myLatLng,
+            title: state.name,
+            draggable: true,
+            map: map
+         });
+        markers.push(marker);
+        return markers;
+    }
+    else{
+       //figure out what to do
+    }
+  })  
+ 
 };
 //removeMarker function
 var removeMarkers = function(arr){
