@@ -88,5 +88,9 @@ margin: 2px;
     width: 100%;
     backface-visibility: hidden;
     will-change: overflow;
+}
 
+.comment {
+    font-size: 10px;
+    font-style: bold;
 }

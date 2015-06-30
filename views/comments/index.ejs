@@ -2,24 +2,23 @@
 <h2>Comments</h2>
 <%  myRecall.comments.forEach(function(comment) { %>
 	<div>
-		<p><a href="/myRecalls/<%= myRecall.id %>/comments/<%= comment._id %>">
-			<%= comment.content%>
-			</a>
-		</p>
-		<h5>Originally commented on <%= comment.date %> by <%= user.firstName%></h5>
-	
-		<p>
-		<button><a href="/myRecalls/<%= myRecall.id %>">View Recall Information</a></button>
-			<button><a href="/myRecalls/<%= myRecall.id %>/comments/<%= comment._id %>">View comment</a></button>
-
-		</p>
+		<p>	<strong><%= comment.content%></strong></p>
+		<p class="comment">--Originally commented on <%= comment.date %> by <%= user.firstName%></p>
+	  <form action="/myRecalls/:myRecall_id/comments/<%= comment._id%>?_method=DELETE" method="POST">
+    <input type="submit" value="Delete">
+  </form>
 	<hr>
 </div>
 <% }) %>
+		<p>
+			<button><a href="/myRecalls/<%= myRecall.id %>/comments/new">New Comment</a></button>
+	
+		<button><a href="/myRecalls/<%= myRecall.id %>">Return to Recall Information</a></button>
+		<button><a href="/myRecalls">All Saved Recalls</a></button>
+		</p>
  <a href="/signup">Signup</a>
  <a href="/login">Login</a>
   <a href="/logout">Logout</a>
-	<button><a href="/myRecalls/<%= myRecall.id %>/comments/new">New Comment</a></button>
-	<button><a href="/myRecalls">Return to Saved Recalls</a></button>
+
 
 <% include ../partials/footer %>

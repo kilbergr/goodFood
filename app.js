@@ -228,6 +228,24 @@ app.delete('/myRecalls/:id', routeMiddleware.ensureLoggedIn, routeMiddleware.ens
 });
 
 //comment routes
+//index
+app.get('/myRecalls/:myRecall_id/comments', function(req, res){
+	req.currentUser(function(err,user){
+		db.MyRecall.findById(req.params.myRecall_id)
+		.populate('comments')
+		.exec(function(err, myRecall){
+			if(err){
+				//TODO: error handling
+				console.log(err);
+				res.redirect('/myRecalls');
+			}
+			else{
+				res.render('comments/index', {myRecall:myRecall, user:user});
+			}
+		});
+	});
+});
+
 //new
 app.get('/myRecalls/:myRecall_id/comments/new', routeMiddleware.ensureLoggedIn, function(req, res){
 	req.currentUser(function(err,user){

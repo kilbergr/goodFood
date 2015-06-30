@@ -11,12 +11,11 @@ var routeHelpers = {
   },
 
   ensureCorrectRecaller: function(req, res, next) {
-    db.Post.findById(req.params.id, function(err,post){
-      if (post.user != req.session.id) {
-        res.redirect('/posts');
+    db.MyRecall.findById(req.params.id, function(err,myRecall){
+      if (myRecall.user != req.session.id) {
+        res.redirect('/myRecalls');
       }
       else {
-
        return next();
       }
     });
