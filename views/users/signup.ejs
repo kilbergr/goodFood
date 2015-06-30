@@ -1,0 +1,36 @@
+<% include ../partials/header %>
+<h1>Sign up to save information about recalls</h1>
+<div id="profile">
+<form method="POST" action="/signup" >
+  <div>
+    <label for="firstName">First Name:    
+      <input type="text" name="user[firstName]" autofocus>
+    </label>
+  </div>
+    <div>
+    <label for="lastName">Last Name:    
+      <input type="text" name="user[lastName]" autofocus>
+    </label>
+  </div>
+  <div>
+    <label for="user">Email:    
+      <input type="text" id="email" name="user[email]" autofocus>
+    </label>
+  </div>
+  <div>
+    <label> Password: 
+      <input type="password" id="pass" name="user[password]">
+     </label>
+  </div>
+  <div>
+    <label> Add profile picture (URL):
+    <input type="text" name="user[avatar]">
+    </label>
+  </div>
+  <div>
+    <input type="submit" value="Sign up">
+  </div>
+</form>
+</div>
+<a href="/login">Have an account? Login in instead</a>
+<% include ../partials/footer %>

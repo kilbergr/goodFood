@@ -42,7 +42,7 @@ app.post("/signup", function (req, res) {
   db.User.create(newUser, function (err, user) {
     if (user) {
       req.login(user);
-      res.redirect("/posts");
+      res.redirect("/search");
     } else {
       console.log(err);
       // TODO - handle errors in ejs!
@@ -61,7 +61,7 @@ app.post("/login", function (req, res) {
   function (err, user) {
     if (!err && user !== null) {
       req.login(user);
-      res.redirect("/posts");
+      res.redirect("/search");
     } else {
       // TODO - handle errors in ejs!
       res.render("users/login");
@@ -163,7 +163,8 @@ app.get('/myRecalls', routeMiddleware.ensureLoggedIn, function(req,res){
   					}
 			    })
   			}
-    });
+  		});
+  	});
 });
 
 //to add to personal database
