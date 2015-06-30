@@ -67,6 +67,8 @@ $('.showLess').on("click", function(e){
 })
 
 
+$('.saveRecall')
+.popup('setting', 'content', 'Log in to save')
 //saving the recall info in your recalls database with AJAX 
 $('.saveRecall').submit(function(e){
 	e.preventDefault();
@@ -179,6 +181,13 @@ initialize();
         "name": "Nationwide",
         "abbreviation": "USA",
         "alternative": "nationally",
+        "latitude": 38.526600,
+        "longitude":  -96.726486
+    },
+        {
+        "name": "nationwide",
+        "abbreviation": "US",
+        "alternative": "Nationally",
         "latitude": 38.526600,
         "longitude":  -96.726486
     },

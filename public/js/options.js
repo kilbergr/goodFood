@@ -48,6 +48,7 @@ $('#searchForm').submit(function(event){
 			alert('Please choose a search type');
 		}	
 	$('#searchForm').after(html + '<input type="submit" value="Find recalls"></div></form>');
+	$('#searchForm').css('display', 'none');
 	});
 
 

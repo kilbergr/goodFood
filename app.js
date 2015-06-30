@@ -45,8 +45,7 @@ app.post("/signup", function (req, res) {
       res.redirect("/myRecalls");
     } else {
       console.log(err);
-      // TODO - handle errors in ejs!
-      res.render("users/signup");
+      res.render("errors/incorrectsignup");
     }
   });
 });
@@ -63,8 +62,7 @@ app.post("/login", function (req, res) {
       req.login(user);
       res.redirect("/myRecalls");
     } else {
-      // TODO - handle errors in ejs!
-      res.render("users/login");
+      res.render("errors/incorrectlogin");
     }
   });
 });
@@ -97,11 +95,6 @@ app.get('/recalls', function(req, res){
 		}
 		else{
 		  var recalls = JSON.parse(body).results;
-		  //console.log(recalls[0]);
-		  //recalls.forEach(function(recall){
-		 		//var add = recall.distribution_pattern;
-				//var states = findState(add, stateNames);
-	  //})
 			res.render('recalls/index', {recalls:recalls});
 		}
 	})
@@ -148,7 +141,7 @@ app.get('/myRecalls', routeMiddleware.ensureLoggedIn, function(req,res){
   		req.currentUser(function(err,user){
   			if(err){
   				console.log(err);
-  				res.render('recalls/index')
+  				res.render('errors/login')
   			}
   			else {
   				res.format({ 
@@ -174,7 +167,7 @@ app.post('/myRecalls', routeMiddleware.ensureLoggedIn, function(req,res){
 	myRecall.save(function(err,myRecall) {
 		if(err){
 			console.log(err);
-			res.render('myRecalls/index');
+			res.render('errors/login');
 		}
 		else{
 			req.currentUser(function(err,user){
@@ -204,7 +197,7 @@ app.get('/myRecalls/:id', function(req, res){
 		.exec(function(err,myRecall){
 			if(err){
 				console.log(err);
-				res.render('myRecalls/index');
+				res.render('errors/404');
 			}
 			else{
 				 res.render("myRecalls/show", {myRecall:myRecall});
@@ -217,7 +210,7 @@ app.delete('/myRecalls/:id', routeMiddleware.ensureLoggedIn, routeMiddleware.ens
 		if(err){
 			//TODO with error
 			console.log(err);
-			res.render('myRecalls/show')
+			res.render('errors/login')
 		}
 		else{
 			res.redirect('/myRecalls');
@@ -233,9 +226,8 @@ app.get('/myRecalls/:myRecall_id/comments', function(req, res){
 		.populate('comments')
 		.exec(function(err, myRecall){
 			if(err){
-				//TODO: error handling
 				console.log(err);
-				res.redirect('/myRecalls');
+				res.render('errors/login');
 			}
 			else{
 				res.render('comments/index', {myRecall:myRecall, user:user});
@@ -251,9 +243,8 @@ app.get('/myRecalls/:myRecall_id/comments/new', routeMiddleware.ensureLoggedIn, 
 		.populate('comments')
 		.exec(function(err, myRecall){
 			if(err){
-				//TODO: error handling
 				console.log(err);
-				res.render('/myRecalls');
+				res.render('errors/login');
 			}
 			else{
 				res.render('comments/new', {myRecall:myRecall, user:user});
@@ -266,14 +257,13 @@ app.get('/myRecalls/:myRecall_id/comments/new', routeMiddleware.ensureLoggedIn, 
 app.post('/myRecalls/:myRecall_id/comments', routeMiddleware.ensureLoggedIn, function(req, res){
 	db.Comment.create(req.body.comment, function (err, comment){
 		if(err){
-			//TODO: error handling
 			console.log(err);
-			res.render('comments/new');
+			res.render('errors/login');
 		}
 		else{
 			req.currentUser(function(err,user){
 				db.MyRecall.findById(req.params.myRecall_id, function(err, myRecall){
-				//add user to comment
+				//to add user to comment
 				myRecall.comments.push(comment);
 				comment.myRecall = myRecall._id;
 				comment.user = user._id;
@@ -292,9 +282,8 @@ app.get('/myRecalls/:myRecall_id/comments/:id', function(req, res){
 		.populate('myRecall')
 		.exec(function(err, comment){
 			if(err){
-			//TODO: error handling
 				console.log(err);
-				res.render('comments');
+				res.render('errors/404');
 			}
 			else
 			res.render('comments/show', {comment:comment, myRecall:comment.myRecall});
@@ -304,6 +293,10 @@ app.get('/myRecalls/:myRecall_id/comments/:id', function(req, res){
 //edit
 app.get('/myRecalls/:myRecall_id/comments/:id/edit', routeMiddleware.ensureLoggedIn, routeMiddleware.ensureCorrectCommenter, function(req, res){
 	db.Comment.findById(req.params.id, function(err, comment){
+		if(err){
+			console.log(err);
+			res.render('errors/login')
+		}
 		res.render('comments/edit', {comment:comment});
 	});
 });
@@ -312,9 +305,8 @@ app.get('/myRecalls/:myRecall_id/comments/:id/edit', routeMiddleware.ensureLogge
 app.put('/myRecalls/:myRecall_id/comments/:id', routeMiddleware.ensureLoggedIn, function(req, res){
 	db.Comment.findByIdAndUpdate(req.params.id, req.body.comment, function(err, comment){
 		if(err){
-			//TODO: error handling
 			console.log(err);
-			res.render('comments/edit');
+			res.render('errors/login');
 		}
 		else{
 			res.redirect('/myRecalls/' + comment.myRecall + "/comments");
@@ -326,9 +318,8 @@ app.put('/myRecalls/:myRecall_id/comments/:id', routeMiddleware.ensureLoggedIn, 
 app.delete('/myRecalls/:myRecall_id/comments/:id', routeMiddleware.ensureLoggedIn, routeMiddleware.ensureCorrectCommenter, function(req, res){
 	db.Comment.findByIdAndRemove(req.params.id, function(err, comment){
 		if(err){
-			//TODO: error handling
 			console.log(err);
-			res.render('comments/index');
+			res.render('errors/login');
 		}
 		else{
 			res.redirect('/myRecalls/' + comment.myRecall + '/comments');
