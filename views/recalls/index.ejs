@@ -3,16 +3,23 @@
 <div class="heading">
 
 	<h1>Relevant Recalls</h1>
-	<div class="headingButtons"><button><a href="/search">New Search</a></button></div>
+		<div class="headingButtons"><button><a href="/search">New Search</a></button></div>
 	<div class="headingButtons"><button><a href="/myRecalls">Saved Recalls</a></button></div>
+	<div class="headingButtons"><button><a href="/login">Login</a></button></div>
+	<div class="headingButtons"><button><a href="/signup">Sign up for an account</a></button></div>
 </div>
 <div class="wrap">
 	
 	
 	<div class="scrollSide">
+
 	<% recalls.forEach(function(recall){%>
-		
-		<!-- What to display -->
+		<!-- Change the date format -->
+		<% var dateStr = recall.report_date; %>
+<% var match = dateStr.match(/(\d{4})(\d{2})(\d{2})/); %>
+<% var dateFormat = match[2] + '/' + match[3] + '/' + match[1]; %>
+		<!-- What to display-->
+		<!-- Base color off of danger classification -->
 		<% if(recall.classification==='Class I'){%>
 			<div class="high">
 		
@@ -23,17 +30,17 @@
 		<% if(recall.classification==='Class III'){%>
 			<div class="low">
 		<%} %>
-
+		
 			<p>What: <%= recall.product_description %></p>
 			<p>By whom: <%= recall.recalling_firm %></p>
-			<p>When: <%= recall.report_date %></p>
+			<p>When: <%= dateFormat %></p>
 
 			<form class="showMore" action="javascript:void(0)" >
 				<input type="hidden" name="recall[desc]" class="product_description" value="<%= recall.product_description %>"> 
 				<input type="hidden" name="recall[reason]" class="reason_for_recall" value="<%=recall.reason_for_recall%>"> 
 				<input type="hidden" name="recall[dist]" class="distribution_pattern" value="<%=recall.distribution_pattern%>" >
 				<input type="hidden" name="recall[firm]" class="recalling_firm" value="<%=recall.recalling_firm%>"> 
-			  <input type="hidden" name="recall[date]" class="report_date" value	="<%=recall.report_date%>"> 
+			  <input type="hidden" name="recall[date]" class="report_date" value	="<%=dateFormat%>"> 
 			  <input type="hidden" name="recall[class]" class="classification" value	="<%=recall.classification%>"> 
 				<input type="submit" value="More Info">
 				

@@ -42,7 +42,7 @@ app.post("/signup", function (req, res) {
   db.User.create(newUser, function (err, user) {
     if (user) {
       req.login(user);
-      res.redirect("/search");
+      res.redirect("/myRecalls");
     } else {
       console.log(err);
       // TODO - handle errors in ejs!
@@ -61,7 +61,7 @@ app.post("/login", function (req, res) {
   function (err, user) {
     if (!err && user !== null) {
       req.login(user);
-      res.redirect("/search");
+      res.redirect("/myRecalls");
     } else {
       // TODO - handle errors in ejs!
       res.render("users/login");
@@ -180,10 +180,8 @@ app.post('/myRecalls', routeMiddleware.ensureLoggedIn, function(req,res){
 			req.currentUser(function(err,user){
 			//add user to saved recall
 			myRecall.user = user._id;
-			//user.myRecalls.push(myRecall);
 			myRecall.save();
-			//user.save();
-     	res.format({
+			res.format({
         'text/html': function(){
          res.render("myRecalls");
         },

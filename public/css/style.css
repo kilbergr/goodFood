@@ -1,6 +1,6 @@
 body{
-	background-color: #FFF8D4;
-	font-family: 'Tahoma';
+	background-color: #FFF5DE;
+	font-family: 'Georgia';
     color: gray;
 	font-size: 18px;
 	padding: 0;
@@ -9,18 +9,19 @@ body{
   }
 /*Styling for different classes of danger*/
 .high{
-background-color: #FFF8D4;
-border: solid #FFB884 3px;
+background-color: #FFF5DE;
+border: solid #750E49 2px;
 margin: 2px;
 }
 
 .mid{
-    background-color: #FFF8D4;
-    border: solid #F5DF98 3px;
+    background-color: #FFF5DE;
+    border: solid #917081 2px;
+    border-radius: 3px;
 }
 .low{
-    background-color: #FFF8D4;
-    border: solid #C0D1C2 3px;
+    background-color: #FFF5DE;
+    border: solid #B8D9C8 2px;
 }
 
 .moreInfo {
@@ -67,7 +68,7 @@ margin: 2px;
 
 .heading {
     display: flex;
-    background-color: #2E4347;
+    background-color: #B8D9C8;
     z-index: 10;
     height: 100px;
     color: #FFF8D4;

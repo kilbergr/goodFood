@@ -1,4 +1,9 @@
 <% include ../partials/header %>
+	<!-- format date -->
+	<% var dateStr = myRecall.report_date; %>
+<% var match = dateStr.match(/(\d{4})(\d{2})(\d{2})/); %>
+<% var dateFormat = match[2] + '/' + match[3] + '/' + match[1]; %>
+<!-- To be shown -->
 <h2>Information on this recall from the FDA's database:</h2>
 <h4><%= myRecall.product_description %></h4>
 <% if(myRecall.classification==="Class I"){ %>
@@ -14,7 +19,7 @@
 <p>Recalled for the following reason: <%= myRecall.reason_for_recall %>.</p><p> Distributed in the following areas: <%=  myRecall.distribution_pattern %>. </p>
 <p>Recall Firm: <%= myRecall.recalling_firm %></p>
 <p>Recall Classification (risk): <%=classInfo%></p>
-<p>Recall Report Date: <%= myRecall.report_date %></p>
+<p>Recall Report Date: <%= dateFormat %></p>
 </div>
 <hr>
 	<a href="/myRecalls/<%= myRecall._id %>/comments"><strong>Comments:</strong></a>
