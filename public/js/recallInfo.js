@@ -29,31 +29,6 @@ var makeRegNameExp = function(stateArr){
     return reName;
 }
 
-//  var findState = function(distString, stateArr){
-//  	// look into case insensitive
-//     var upCased = distString.toUpperCase();
-//  	var stringArr = upCased.split(" ");
-//   stringArr.forEach(function(word){
-//     //make word into regexp
-//    word = "\b"+word+"\b";
-//   })
-//  	var distStates = [];
-//  	for (var i = 0; i < stateArr.length; i++){
-//  		for (var j = 0; j < stringArr.length; j++){
-//       //look for matches for either name or abbreviation of state
-//       var name = stringArr[j].indexOf(stateArr[i].name);
-//       var abbr = stringArr[j].indexOf(stateArr[i].abbreviation);
-//  			if(name!== -1 || abbr!== -1){
-//         if(distStates.indexOf(name)=== -1 && distStates.indexOf(abbr)===-1){
-//             distStates.push(stateArr[i]);
-//         }
-//       };
-//     }
-
-//   }
-//  return distStates;
-// };
-
 var findStateNameRegExp = function(distString, stateArr){
     var reName = makeRegNameExp(stateArr);
     var nameMatch = distString.match(reName);
@@ -67,18 +42,21 @@ var findStateAbbrRegExp = function(distString, stateArr){
 
 //show more info on request
 $('.showMore').on("click", function(e){
-  var allStates = [];
   e.preventDefault();
   $(this).next('.moreInfo').css('display', 'block');
   var pattern = $(this).children('.distribution_pattern').val();
-  console.log(pattern);
   var distStateNames = findStateNameRegExp(pattern, stateNames);
   var distStateAbbr = findStateAbbrRegExp(pattern, stateNames);
-
-  distStateNames.forEach(function(state){
-    addMarkers(state, stateNames);
-  });
-
+  if(distStateNames!==null){
+    distStateNames.forEach(function(state){
+        addMarkers(state, stateNames);
+    });
+  }
+ else{
+    distStateAbbr.forEach(function(state){
+        addMarkers(state, stateNames);
+    });
+  }
 })
 
 //show less info on request
@@ -192,6 +170,18 @@ initialize();
 
 //states and their longitudes/latitudes
  var stateNames = [
+ {
+        "name": "Canada",
+        "latitude": 52.1396545,
+        "longitude":  -106.6467271  
+    },
+   {
+        "name": "Nationwide",
+        "abbreviation": "USA",
+        "alternative": "nationally",
+        "latitude": 38.526600,
+        "longitude":  -96.726486
+    },
     {
         "name": "Alabama",
         "abbreviation": "AL",
