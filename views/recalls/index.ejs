@@ -1,21 +1,34 @@
 <%include ../partials/headerRecalls %>
 
-<div class="ui block header">
+<div class="heading">
 
 	<h1>Relevant Recalls</h1>
-	
+
 </div>
 <div class="ui four buttons">
-		<button class="ui active button"><a href="/search">New Search</a></button>
-		<button class="ui button"><a href="/myRecalls">Saved Recalls</a></button>
-		<button class="ui button"><a href="/login">Login</a></button>
-		<button class="ui button"><a href="/signup">Make an Account</a></button>
+
+			<button class="ui active button"><a href="/search">New Search</a>
+			</button>
+
+		<button class="ui button">
+			<a href="/myRecalls">Saved Recalls</a>
+		</button>
+
+		<button class="ui button">
+			<a href="/login">Login</a>
+		</button>
+
+		<button class="ui button">
+			<a href="/signup">Make an Account</a>
+		</button>
+
 	</div>
 <div class="wrap">
 	
 	
 	<div class="scrollSide">
 
+	
 	<% recalls.forEach(function(recall){%>
 		<!-- Change the date format -->
 		<% var dateStr = recall.report_date; %>
@@ -34,9 +47,9 @@
 			<div class="low">
 		<%} %>
 		
-			<p>What: <%= recall.product_description %></p>
-			<p>By whom: <%= recall.recalling_firm %></p>
-			<p>When: <%= dateFormat %></p>
+			<p><strong>What</strong>: <%= recall.product_description %></p>
+			<p><strong>By whom</strong>: <%= recall.recalling_firm %></p>
+			<p><strong>When</strong>: <%= dateFormat %></p>
 
 			<form class="showMore" action="javascript:void(0)" >
 				<input type="hidden" name="recall[desc]" class="product_description" value="<%= recall.product_description %>"> 
@@ -51,9 +64,9 @@
 
 			<div class="moreInfo">
 				
-			<p>Why: <%= recall.reason_for_recall %></p>
-			<p>Recalled from: <%= recall.distribution_pattern %>.</p>
- 			<p>Risk Classification: <%= recall.classification %></p>
+			<p><strong>Why</strong>: <%= recall.reason_for_recall %></p>
+			<p><strong>Recalled from</strong>: <%= recall.distribution_pattern %>.</p>
+ 			<p><strong>Risk Classification</strong>: <%= recall.classification %></p>
  		
  			<form class="showLess" action="javascript:void(0)"><input type="submit" value="Less Info"></form>
 			<form class ="saveRecall" action="/myRecalls" method="POST"><input type="submit" value="Save to My Recalls"></form>

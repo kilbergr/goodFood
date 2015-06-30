@@ -9,26 +9,35 @@ body{
   }
 /*Styling for different classes of danger*/
 .high{
-    background-color: #D7E5E4;
-    border: solid #750E49 2px;
+    /*background-color: #D7E5E4;*/
+    border: solid #b30051 2px;
     border-radius: 5px;
     padding: 10px;
     margin: 3px;
+}
+.high:hover {
+    background-color: #ffaaaa;
 }
 
 .mid{
-    background-color: #D7E5E4;*/
-    border: solid #917081 2px;
+    /*background-color: #D7E5E4;*/
+    border: solid #ffa700 2px;
     border-radius: 5px;
     padding: 10px;
     margin: 3px;
 }
+.mid:hover{
+    background-color: #ffd5aa;
+}
 .low{
-    background-color: #D7E5E4;
-    border: solid #B8D9C8 2px;
+    /*background-color: #D7E5E4;*/
+    border: solid #0085ff 2px;
     border-radius: 5px;
     padding: 10px;
     margin: 3px;
+}
+.low:hover{
+    background-color: #aafeff;
 }
 
 .moreInfo {
