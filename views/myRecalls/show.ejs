@@ -1,0 +1,27 @@
+<% include ../partials/headerRecalls %>
+<h2>Information on this recall from the FDA's database:</h2>
+<h4><%= myRecall.product_description %></h4>
+<% if(myRecall.classification==="Class I"){ %>
+	<% var classInfo =  "Dangerous or defective products that predictably could cause serious health problems or death." %>
+<% } %>
+<% if(myRecall.classification==="Class II"){ %>
+<% var classInfo =  "Products that might cause a temporary health problem, or pose only a slight threat of a serious nature. " %>
+<% } %>
+<% if(myRecall.classification==="Class III"){ %>
+<% var classInfo =  "Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws." %>
+<% } %>
+<div>
+<p>Recalled for the following reason: <%= myRecall.reason_for_recall %>.</p><p> Distributed in the following areas: <%=  myRecall.distribution_pattern %>. </p>
+<p>Recall Firm: <%= myRecall.recalling_firm %></p>
+<p>Recall Classification (risk): <%=classInfo%></p>
+<p>Recall Report Date: <%= myRecall.report_date %></p>
+</div>
+<form action="/myRecalls/<%= myRecall.id %>?_method=delete" method="POST">
+<input type="submit" value="Delete">
+</form>
+<p><a href="/myRecalls">Back to Saved Recalls</a></p>
+<p><a href="/Search">New Search</a></p>
+
+<% include ../partials/footer %>
+
+	

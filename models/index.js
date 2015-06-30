@@ -5,3 +5,5 @@ mongoose.set("debug", true);
 module.exports.Recall = require("./recall");
 module.exports.MyRecall = require("./myRecall");
 module.exports.User=require('./user');
+module.exports.Comment = require('./comment');
+

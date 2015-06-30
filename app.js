@@ -5,7 +5,10 @@ bodyParser = require("body-parser"),
 methodOverride = require("method-override"),
 morgan = require("morgan"),
 favicon = require("serve-favicon"),
-request = require("request");
+request = require("request"),
+session = require("cookie-session"),
+loginMiddleware = require("./middleware/loginHelper"),
+routeMiddleware = require("./middleware/routeHelper");
 //using dotenv to hide APIs
 require('dotenv').load();
 	//food API
@@ -17,35 +20,61 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.use(morgan('tiny'));
 app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(loginMiddleware);
+
+//cookie set
+app.use(session({
+	maxAge: 3600000,
+	secret: 'itsasecret',
+	name: 'oatmealraisin'
+}));
 
 
-	//parsing strings of distribution patterns to find state names (in array)
- var findState = function(str, arr){
- 	var upCased = str.toUpperCase();
- 	var distStates = [];
- 	for (var i = 0; i < arr.length; i++){
- 		if(upCased.indexOf(arr[i])!= -1){
- 			distStates.push(arr[i]);
- 		};
- 	}
- 	return distStates;
- };
+//LOGIN RELATED ROUTES
+//signup page
+app.get('/signup', routeMiddleware.preventLoginSignup, function(req,res){
+  res.render('users/signup');
+});
 
-//getting states' APIs
-var mapStates=function(arr){
-	var apiArr = [];
-	for(var j = 0; j < arr.length; j++){
-		var state = encodeURIComponent(arr[j]);
-		var apiUrl = 'http://maps.googleapis.com/maps/api/geocode/json?address=' + state;
-		apiArr.push(apiUrl);
-	}
-	return apiArr;
-}
+//create new user
+app.post("/signup", function (req, res) {
+  var newUser = req.body.user;
+  db.User.create(newUser, function (err, user) {
+    if (user) {
+      req.login(user);
+      res.redirect("/posts");
+    } else {
+      console.log(err);
+      // TODO - handle errors in ejs!
+      res.render("users/signup");
+    }
+  });
+});
 
+//login page for existing users
+app.get("/login", routeMiddleware.preventLoginSignup, function (req, res) {
+  res.render("users/login");
+});
 
+app.post("/login", function (req, res) {
+  db.User.authenticate(req.body.user,
+  function (err, user) {
+    if (!err && user !== null) {
+      req.login(user);
+      res.redirect("/posts");
+    } else {
+      // TODO - handle errors in ejs!
+      res.render("users/login");
+    }
+  });
+});
 
-stateNames = ["NATIONALLY", "NATIONWIDE", "NATIONAL", "USA", "ALABAMA", "ALASKA", "ARIZONA", "ARKANSAS", "CALIFORNIA", "COLORADO", "CONNECTICUT", "DELAWARE", "FLORIDA", "GEORGIA", "HAWAII", "IDAHO", "ILLINOIS", "INDIANA", "IOWA", "KANSAS", "KENTUCKY", "LOUISIANA", "MAINE", "MARYLAND", "MASSACHUSETTS", "MICHIGAN", "MINNESOTA", "MISSISSIPPI", "MISSOURI", "MONTANA", "NEBRASKA", "NEVADA", "NEW HAMPSHIRE", "NEW JERSEY", "NEW MEXICO", "NEW YORK", "NORTH CAROLINA", "NORTH DAKOTA", "OHIO", "OKLAHOMA", "OREGON", "PENNSYLVANIA", "RHODE ISLAND", "SOUTH CAROLINA", "SOUTH DAKOTA", "TENNESSEE", "TEXAS", "UTAH", "VERMONT", "VIRGINIA", "WASHINGTON", "WEST VIRGINIA", "WISCONSIN", "WYOMING", "DISTRICT OF COLUMBIA", "PUERTO RICO", "GUAM", "AMERICAN SAMOA", "U.S. VIRGIN ISLANDS", "NORTHERN MARIANA ISLANDS", "AK","AL","AR","AZ","CA","CO","CT","DC","DE","FL","GA","GU","HI","IA","ID", "IL","IN","KS","KY","LA","MA","MD","ME","MH","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY", "OH","OK","OR","PA","PR","PW","RI","SC","SD","TN","TX","UT","VA","VI","VT","WA","WI","WV","WY"]; 
+app.get('/logout', function(req, res){
+	req.logout();
+	res.redirect('/');
+})
 
+//search page routes
 app.get('/', function(req, res){
 	res.redirect('/search')
 });
@@ -149,7 +178,6 @@ app.post('/myRecalls', function(req,res){
 });
 
 
-
 app.get('/myRecalls/:id', function(req, res){
 	db.MyRecall.findById(req.params.id, function(err,myRecall){
     res.render("myRecalls/show", {myRecall:myRecall});
@@ -169,6 +197,100 @@ app.delete('/myRecalls/:id', function(req, res){
 		}
 	})
 })
+
+//new
+app.get('/myRecalls/:myRecall_id/comments/new', routeMiddleware.ensureLoggedIn, function(req, res){
+	req.currentUser(function(err,user){
+		db.MyRecall.findById(req.params.myRecall_id)
+		.populate('comments')
+		.exec(function(err, myRecall){
+			if(err){
+				//TODO: error handling
+				console.log(err);
+				res.render('/myRecalls');
+			}
+			else{
+				res.render('comments/new', {myRecall:myRecall, user:user});
+			}
+		});
+	});
+});
+
+//create
+app.post('/myRecalls/:myRecall_id/comments', routeMiddleware.ensureLoggedIn, function(req, res){
+	db.Comment.create(req.body.comment, function (err, comment){
+		if(err){
+			//TODO: error handling
+			console.log(err);
+			res.render('comments/new');
+		}
+		else{
+			req.currentUser(function(err,user){
+				db.MyRecall.findById(req.params.myRecall_id, function(err, myRecall){
+				//add user to comment
+				myRecall.comments.push(comment);
+				comment.myRecall = myRecall._id;
+				comment.user = user._id;
+				comment.save();
+				myRecall.save();
+				res.redirect('/myRecalls/' + req.params.myRecall_id + "/comments");
+				});
+			});
+		}
+	});
+});
+
+//show
+app.get('/myRecalls/:myRecall_id/comments/:id', function(req, res){
+		db.Comment.findById(req.params.id)
+		.populate('myRecall')
+		.exec(function(err, comment){
+			if(err){
+			//TODO: error handling
+				console.log(err);
+				res.render('comments');
+			}
+			else
+			res.render('comments/show', {comment:comment, myRecall:comment.myRecall});
+		});
+});
+
+//edit
+app.get('/myRecalls/:myRecall_id/comments/:id/edit', routeMiddleware.ensureLoggedIn, routeMiddleware.ensureCorrectCommenter, function(req, res){
+	db.Comment.findById(req.params.id, function(err, comment){
+		res.render('comments/edit', {comment:comment});
+	});
+});
+
+//update
+app.put('/myRecalls/:myRecall_id/comments/:id', routeMiddleware.ensureLoggedIn, function(req, res){
+	db.Comment.findByIdAndUpdate(req.params.id, req.body.comment, function(err, comment){
+		if(err){
+			//TODO: error handling
+			console.log(err);
+			res.render('comments/edit');
+		}
+		else{
+			res.redirect('/myRecalls/' + comment.myRecall + "/comments");
+		}
+	});
+});
+
+//destroy
+app.delete('/myRecalls/:myRecall_id/comments/:id', routeMiddleware.ensureLoggedIn, routeMiddleware.ensureCorrectCommenter, function(req, res){
+	db.Comment.findByIdAndRemove(req.params.id, function(err, comment){
+		if(err){
+			//TODO: error handling
+			console.log(err);
+			res.render('comments/index');
+		}
+		else{
+			res.redirect('/myRecalls/' + comment.myRecall + '/comments');
+		}
+	});
+});
+
+
 
 app.listen(process.env.PORT || 8080, function(){
 	console.log("listening on 8080");
