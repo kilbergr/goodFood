@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Sign up Error</title>
-</head>
-<body>
-	
-<p>Looks like your login encountered an error. <a href="/login">Please try again</a>. </p>
-<p>If you haven't yet signed up, please do so <a href="/signup">here</p>.
-
-
-</body>
-</html>
+<% include ../partials/headerError %>
+<div class="fruitstrip">
+<div class="ui inverted">	
+<p>Looks like your login encountered an error. <a href="/login"><div class="ui inverted teal button">Please try again</div></a>. </p>
+<p>OR</p>
+<p><a href="/signup"><div class="ui inverted teal button">Sign up for an account here</div></a>.</p>
+</div>
+</div>
+<% include ../partials/footer %>
