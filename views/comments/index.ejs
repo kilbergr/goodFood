@@ -14,14 +14,14 @@
 		</div>
 		<% }) %>
 		<p>
-		<div class="ui inverted blue button"><a href="/myRecalls/<%= myRecall.id %>/comments/new">New Comment</a></div>
-			
-				<div class="ui inverted blue button"><a href="/myRecalls/<%= myRecall.id %>">Return to Recall Information</a></div>
-				<div class="ui inverted blue button"><a href="/myRecalls">All Saved Recalls</a></div>
-				</p>
-		<div class="ui inverted teal button"><a href="/signup">Signup</a></div>
-		<div class="ui inverted teal button"><a href="/login">Login</a></div>
-		<div class="ui inverted teal button"> <a href="/logout">Logout</a></div>
+			<a href="/myRecalls/<%= myRecall.id %>/comments/new"><div class="ui inverted blue button">New Comment</div></a>
+			<a href="/myRecalls/<%= myRecall.id %>"><div class="ui inverted blue button">Return to Recall Information</div></a>
+			<a href="/myRecalls"><div class="ui inverted blue button">All Saved Recalls</div></a>
+		</p>
+
+		<a href="/signup">	<div class="ui inverted teal button">Signup</div></a>
+		<a href="/login"><div class="ui inverted teal button">Login</div></a>
+		<a href="/logout"><div class="ui inverted teal button"> Logout</div></a>
 		</div>
 	</div>
 

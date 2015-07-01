@@ -327,7 +327,9 @@ app.delete('/myRecalls/:myRecall_id/comments/:id', routeMiddleware.ensureLoggedI
 	});
 });
 
-
+app.get('*', function(req, res){
+	res.render('errors/400');
+})
 
 app.listen(process.env.PORT || 8080, function(){
 	console.log("listening on 8080");
