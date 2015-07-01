@@ -10,7 +10,7 @@ var routeHelpers = {
     }
   },
 
-  ensureCorrectRecaller: function(req, res, next) {
+  ensureCorrectUser: function(req, res, next) {
     db.MyRecall.findById(req.params.id, function(err,myRecall){
       if (myRecall.user != req.session.id) {
         res.redirect('/myRecalls');

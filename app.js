@@ -75,10 +75,9 @@ app.get('/logout', function(req, res){
 //account holders routes
 //account info
 app.get('/myAccount', routeMiddleware.ensureLoggedIn, function(req, res){
-	req.currentUser(function(err,user){
+	req.currentUser(function(err, user){
   			if(err){
   				console.log(err);
-  				res.render('errors/login')
   			}
   			else {
 					res.render('users/myAccount', {user:user});
@@ -87,7 +86,7 @@ app.get('/myAccount', routeMiddleware.ensureLoggedIn, function(req, res){
 })
 
 //edit account info
-app.get('/myAccount/edit', routeMiddleware.ensureLoggedIn, routeMiddleware.ensureCorrectRecaller, function(req, res){
+app.get('/myAccount/:id/edit', routeMiddleware.ensureLoggedIn, function(req, res){
 	req.currentUser(function(err,user){
   			if(err){
   				console.log(err);
@@ -100,14 +99,14 @@ app.get('/myAccount/edit', routeMiddleware.ensureLoggedIn, routeMiddleware.ensur
 })
 
 //update account info
-app.put('/myAccount', routeMiddleware.ensureLoggedIn, routeMiddleware.ensureCorrectRecaller, function(req, res){
-	req.currentUser(function(err,user){
+app.put('/myAccount/:id', routeMiddleware.ensureLoggedIn, function(req, res){
+	db.User.findByIdAndUpdate(req.params.id, req.body.user, function(err,user){
   			if(err){
   				console.log(err);
   				res.render('errors/login')
   			}
   			else {
-					res.render('users/edit', {user:user});
+					res.render('users/myAccount', {user:user});
 				}
 			})
 })
@@ -246,7 +245,7 @@ app.get('/myRecalls/:id', function(req, res){
     });
 	});
 
-app.delete('/myRecalls/:id', routeMiddleware.ensureLoggedIn, routeMiddleware.ensureCorrectRecaller, function(req, res){
+app.delete('/myRecalls/:id', routeMiddleware.ensureLoggedIn, routeMiddleware.ensureCorrectUser, function(req, res){
 	db.MyRecall.findByIdAndRemove(req.params.id, function(err, myRecall){
 		if(err){
 			console.log(err);

@@ -6,7 +6,9 @@
 		<p>Email: <%= user.email %></p>
 		<p>Profile Picture: <img height="100px" src="<%=user.avatar%>"></p>
 
-		<div class="ui inverted teal button"><a href="myAccount/edit">Edit User Account</a></div>
+		<a href="/myAccount/<%= user.id %>/edit"><div class="ui inverted teal button">Edit User Account</div></a>
+		<a href="/search"><div class="ui inverted teal button">New Search</div></a>
+		<a href="/logout"><div class="ui inverted teal button"> Logout</div></a>
 
 	</div>
 </div>

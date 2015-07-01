@@ -3,7 +3,7 @@
 <div class="ui inverted form">
     <h1>Edit Account User Information</h1>
     <div id="profile">
-    <form method="POST" action="/myAccount/?_method=PUT" >
+    <form method="POST" action="/myAccount/<%= user.id %>?_method=PUT">
       <div>
         <label for="firstName">Edit First Name:    
           <input type="text" name="user[firstName]" value="<%= user.firstName %>" autofocus>
