@@ -1,0 +1,13 @@
+<%include ../partials/headerSearch %>
+<div class="fruitstrip">
+	<div class="ui inverted form">
+		<p>First Name: <%= user.firstName %></p>
+		<p>Last Name: <%= user.lastName %></p>
+		<p>Email: <%= user.email %></p>
+		<p>Profile Picture: <img height="100px" src="<%=user.avatar%>"></p>
+
+		<div class="ui inverted teal button"><a href="myAccount/edit">Edit User Account</a></div>
+
+	</div>
+</div>
+<% include ../partials/footer %>
