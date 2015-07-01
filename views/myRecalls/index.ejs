@@ -1,13 +1,17 @@
 <% include ../partials/headerMyRecall %>
-<h2>Recalls you've saved:</h2>
-<a href="/search">New Search</a>
-<% myRecalls.forEach(function(myRecall){ %>
-<p><strong><%= myRecall.product_description %></strong></p>
+<div class="fruitstrip">
+	<h2>Recalls you've saved:</h2>
+	<div class="ui inverted blue button">
+		<a href="/search">New Search</a>
+	</div>
+	<% myRecalls.forEach(function(myRecall){ %>
+	<p><strong><%= myRecall.product_description %></strong></p>
+	<div class="ui inverted blue button">
+		<a href="/myRecalls/<%= myRecall.id %>">More about Recall</a>
+	</div>
+	<hr>
+		<% }) %>
 
-<!-- <p>Where this product was distributed: <%=  myRecall.distribution_pattern %></p> -->
-<button><a href="/myRecalls/<%= myRecall.id %>">More about Recall</a></button>
-<hr>
-	<% }) %>
 
 
 

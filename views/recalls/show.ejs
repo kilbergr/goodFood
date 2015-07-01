@@ -1,7 +1,8 @@
 <% include ../partials/headerRecalls %>
-<h2>Information on this recall from the FDA's database:</h2>
-<p><strong><%= myRecall.product_description %></strong></p>
-<%=  myRecall.distribution_pattern %>
-<a href="/recalls">Back to results</a>
-
+<div class="fruitstrip ui inverted">
+	<h2>Information on this recall from the FDA's database:</h2>
+	<p><strong><%= myRecall.product_description %></strong></p>
+	<%=  myRecall.distribution_pattern %>
+	<div class="ui inverted blue button"><a href="/recalls">Back to results</a></div>
+</div>
 <% include ../partials/footer %>

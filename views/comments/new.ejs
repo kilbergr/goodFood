@@ -1,12 +1,15 @@
-<% include ../partials/header %>
-<div id="newcomment">
-<form action="/myRecalls/<%= myRecall._id %>/comments" method="POST">
-	<label for="comment[content]">Comment (required):
-		<input type="text" name="comment[content]" id="">
-	</label>
-		<input type="submit" value="Submit">
-</form>
+<% include ../partials/headerSearch %>
+<div class="fruitstrip">
+		<div id="newcomment" class="ui inverted form">
+		<form action="/myRecalls/<%= myRecall._id %>/comments" method="POST">
+			<label for="comment[content]">Comment (required):
+				<input type="text" name="comment[content]" id="">
+			</label>
+			<div class="ui inverted blue button">
+				<input type="submit" value="Submit"></div>
+		</form>
+		</div>
+		<div class="ui inverted blue button"><a href="/myRecalls">Return to Saved Recalls</a></div>
+		<div class="ui inverted blue button"><a href="/myRecalls/<%= myRecall._id %>/comments">See all comments</a></div>
 </div>
-<button><a href="/myRecalls">Return to Saved Recalls</a></button>
-<button><a href="/myRecalls/<%= myRecall._id %>/comments">See all comments</a></button>
 <% include ../partials/footer %>

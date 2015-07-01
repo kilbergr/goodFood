@@ -1,5 +1,8 @@
 <% include ../partials/header %>
+  <div class="fruitstrip">
+
 <h1>Login</h1>
+<div class="ui inverted form">
 <form method="POST" action="/login" >
   <div>
     <label for="email"> Email:     </label>
@@ -11,7 +14,9 @@
       <input type="password" id="pass" name="user[password]">
 
   </div>
-  <input type="submit" value="Login">
+  <input class="ui inverted blue button" type="submit" value="Login">
 </form>
-<a href="/signup">Need an account? Sign up here!</a>
+<div class="ui inverted blue button"><a href="/signup">Need an account? Sign up here!</a></div>
+</div>
+</div>
 <% include ../partials/footer %>

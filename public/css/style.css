@@ -66,3 +66,12 @@
     margin-top: -300px;
     padding-top: 300px;
 }
+
+.fruitstrip{
+    padding: 20px;
+    background-image: url(http://www.wired.com/wp-content/uploads/images_blogs/wiredscience/2012/05/heikkileis_mould09.jpg);
+    height: 100%;
+    z-index: 10;
+    color: #BDCFCD;
+    background-color: #000;
+}

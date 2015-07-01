@@ -68,7 +68,6 @@ $('.showLess').on("click", function(e){
 
 
 $('.saveRecall')
-.popup('setting', 'content', 'Log in to save')
 //saving the recall info in your recalls database with AJAX 
 $('.saveRecall').submit(function(e){
 	e.preventDefault();

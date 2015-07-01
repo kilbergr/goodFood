@@ -34,13 +34,13 @@
 		<!-- What to display-->
 		<!-- Base color off of danger classification -->
 		<% if(recall.classification==='Class I'){%>
-			<div class="ui fluid inverted red button">
+			<div class="ui fluid inverted red basic button">
 		<%} %>
 		<% if(recall.classification==='Class II'){%>
-	  	<div class="ui fluid inverted yellow button">
+	  	<div class="ui fluid inverted basic yellow button">
 		<%} %>
 		<% if(recall.classification==='Class III'){%>
-			<div class="ui fluid inverted teal button">
+			<div class="ui fluid inverted basic blue button">
 		<%} %>
 		
 			<p><strong>What</strong>: <%= recall.product_description %></p>
@@ -54,7 +54,7 @@
 				<input type="hidden" name="recall[firm]" class="recalling_firm" value="<%=recall.recalling_firm%>"> 
 			  <input type="hidden" name="recall[date]" class="report_date" value	="<%=dateFormat%>"> 
 			  <input type="hidden" name="recall[class]" class="classification" value	="<%=recall.classification%>"> 
-				<input class="ui inverted blue button" type="submit" value="More Info">
+				<input class="ui inverted teal button" type="submit" value="More Info">
 				
 			</form>
 
@@ -64,8 +64,8 @@
 			<p><strong>Recalled from</strong>: <%= recall.distribution_pattern %>.</p>
  			<p><strong>Risk Classification</strong>: <%= recall.classification %></p>
  		
- 			<form class="showLess ui inverted blue button" action="javascript:void(0)"><input type="submit" value="Less Info"></form>
-			<form class ="saveRecall" action="/myRecalls" method="POST"><input class="ui inverted blue button" type="submit" value="Save to My Recalls"></form>
+ 			<form class="showLess ui inverted teal button" action="/recalls"><input type="submit" value="Less Info"></form>
+			<form class ="saveRecall" action="/myRecalls" method="POST"><input class="ui inverted teal button" data-title="Log in to Save Recalls" type="submit" value="Save to My Recalls"></form>
  		</div>
 			<!-- <hr> -->
 	</div>

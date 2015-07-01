@@ -1,8 +1,12 @@
-<% include ../partials/header %>
-<form action="/myRecalls/<%=comment.myRecall %>/comments/<%= comment._id %>?_method=put" method="POST">
-	<label for="comment[content]">
-		<input type="text" name="comment[content]" id="" value="<%= comment.content %>">
-	</label>
-	<input type="submit" value="Edit">
-</form>
+<% include ../partials/headerSearch %>
+<div class="fruitstrip">
+	<div class="ui inverted form">
+	<form action="/myRecalls/<%=comment.myRecall %>/comments/<%= comment._id %>?_method=put" method="POST">
+		<label for="comment[content]">
+			<input type="text" name="comment[content]" id="" value="<%= comment.content %>">
+		</label>
+		<input type="submit" value="Edit">
+	</form>
+	</div>
+</div>
 <% include ../partials/footer %>

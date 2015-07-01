@@ -1,24 +1,28 @@
-<% include ../partials/header %>
-<h2>Comments</h2>
-<%  myRecall.comments.forEach(function(comment) { %>
-	<div>
-		<p>	<strong><%= comment.content%></strong></p>
-		<p class="comment">--Originally commented on <%= comment.date %> by <%= user.firstName%></p>
-	  <form action="/myRecalls/:myRecall_id/comments/<%= comment._id%>?_method=DELETE" method="POST">
-    <input type="submit" value="Delete">
-  </form>
-	<hr>
-</div>
-<% }) %>
+<% include ../partials/headerSearch %>
+<div class="fruitstrip">
+	<div class="ui inverted">
+		<h2>Comments</h2>
+		<%  myRecall.comments.forEach(function(comment) { %>
+			<div>
+				<p>	<strong><%= comment.content%></strong></p>
+				<p class="comment">--Originally commented on <%= comment.date %> by <%= user.firstName%></p>
+				
+			  <form action="/myRecalls/:myRecall_id/comments/<%= comment._id%>?_method=DELETE" method="POST">
+		    <div class="ui inverted blue button"><input type="submit" value="Delete"></div>
+		  </form>
+			<hr>
+		</div>
+		<% }) %>
 		<p>
-			<button><a href="/myRecalls/<%= myRecall.id %>/comments/new">New Comment</a></button>
-	
-		<button><a href="/myRecalls/<%= myRecall.id %>">Return to Recall Information</a></button>
-		<button><a href="/myRecalls">All Saved Recalls</a></button>
-		</p>
- <a href="/signup">Signup</a>
- <a href="/login">Login</a>
-  <a href="/logout">Logout</a>
-
+		<div class="ui inverted blue button"><a href="/myRecalls/<%= myRecall.id %>/comments/new">New Comment</a></div>
+			
+				<div class="ui inverted blue button"><a href="/myRecalls/<%= myRecall.id %>">Return to Recall Information</a></div>
+				<div class="ui inverted blue button"><a href="/myRecalls">All Saved Recalls</a></div>
+				</p>
+		<div class="ui inverted teal button"><a href="/signup">Signup</a></div>
+		<div class="ui inverted teal button"><a href="/login">Login</a></div>
+		<div class="ui inverted teal button"> <a href="/logout">Logout</a></div>
+		</div>
+	</div>
 
 <% include ../partials/footer %>

@@ -25,13 +25,13 @@ $('#searchForm').submit(function(event){
 	var divSubmit;
 	if(val==='foodType'){
 			var html = '<div class="ui fluid icon input"><form id="newFoodSearch" action="/recalls" method="POST">' +
-		'<label for="inReason">Food: <input type="text" name="recall[foodType]" id="food" autofocus placeholder="Search..."> </label>';
+		'<label for="inReason">Food: <input type="text" name="recall[foodType]" id="food" autofocus placeholder="Search by food..."> </label>';
 		//divSubmit = '#newFoodSearch';
 		}
 		//for searching by distribution area
 		else if (val ==='location'){
 				var html = '<div class="ui fluid icon input"><form id="newLocSearch" action="/recalls" method="POST">' +
-			'<label for="inReason">Location: <input type="text" name="recall[location]" id="loc" autofocus placeholder="Search..."></label>';
+			'<label for="inReason">Location: <input type="text" name="recall[location]" id="loc" autofocus placeholder="Search by location..."></label>';
 			//divSubmit = '#newLocSearch';
 		}
 		//for searching by date range
