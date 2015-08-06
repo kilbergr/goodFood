@@ -39,9 +39,52 @@ a {
 .invertBtn {
     border: solid 2px #BCB296;
     color: #BCB296;
-    background-color: rgba(0,0,0,0);
+    background-color: #000;
     font-family: 'Muli';
     border-radius: 2px;
+    display: inline;
+}
+.invertBtn:hover{
+    cursor: pointer;
+    background-color: rgba(188, 178, 150, 0.5);
+}
+
+/*color key*/
+.colorSqI {
+    height: 2%;
+    width: 2%;
+    background-color: #9F564F; 
+    margin: 2px;
+}
+.colorSqII {
+    height: 2%;
+    width: 2%;
+    background-color: #EAB150; 
+    margin: 2px;
+}
+.colorSqIII {
+    height: 2%;
+    width: 2%;
+    background-color: #6C7739;
+    margin: 2px;
+}
+
+.stay {
+    position: absolute;
+    height: 10%;
+    top: 33%;
+}
+
+.scroll {
+    top: 50%;
+    overflow:scroll;
+    height: 60%;
+}
+
+.upper {
+    background-color: #000;
+    width: 100%;
+    height: 10%;
 }
 
 /*nav styling*/
@@ -53,6 +96,7 @@ a {
     margin: 3%;
     text-decoration: none;
     letter-spacing: 4px;
+    padding: 1%;
 }
 .navBtn:hover {
     font-family: 'Muli';
@@ -61,6 +105,7 @@ a {
     width: 20%;
     display: inline;
     margin: 3%;
+    padding: 1%;
     text-decoration: none;
 }
 
@@ -123,7 +168,7 @@ a {
 	display: flex;
     overflow: hidden;
     height: 150vh;
-    margin-top: -300px;
+    margin-top: -200px;
     padding-top: 300px;
 }
 
