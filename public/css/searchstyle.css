@@ -1,0 +1,85 @@
+
+h2 {
+    font-family: 'Special Elite', cursive;
+    color: #F0DBBA;
+    font-size: 36px;
+    background-color: ;
+    text-align: center;
+    margin-top: 30%;
+}
+
+h2 span {
+    position:absolute;
+    top:0;
+    right:0;
+    width:0;
+    background: white; /* same as background */
+    border-left: .1em solid black;
+    
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    
+    -webkit-animation: typing 22s steps(30, end), /* # of steps = # of characters */
+                        blink-caret 1s step-end infinite;
+    -moz-animation: typing 22s steps(30, end), /* # of steps = # of characters */
+}
+.searchform {
+    color: #C6CBA8;
+    font-size: 24px;
+    font-family: 'Special Elite';
+    text-align: center;
+}
+
+@-webkit-keyframes typing {
+    from { width: 100% }
+    to { width:0 }
+}
+
+@-webkit-keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: black }
+}
+
+@-moz-keyframes typing {
+    from { width: 100% }
+    to { width:0 }
+}
+
+@-moz-keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: black }
+}
+
+html {
+    background: url('../images/heikkileis_mould09.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.invertedButton {
+  background: #000;
+
+  -webkit-border-radius: 16;
+  -moz-border-radius: 16;
+  border-radius: 1px;
+  border: solid #C6CBA8 1px;
+  /*text-shadow: 1px 1px 3px #666666;*/
+  font-family: 'Special Elite';
+  color: #C6CBA8;
+  font-size: 18px;
+  padding: 5px 10px 5px 10px;
+  text-decoration: none;
+  margin: 10px;
+}
+
+.invertedButton:hover {
+  background: #543F1F;
+  background-image: -webkit-linear-gradient(top, #543F1F, #3C2C16);
+  background-image: -moz-linear-gradient(top, #543F1F, #3C2C16);
+  background-image: -ms-linear-gradient(top, #543F1F, #3C2C16);
+  background-image: -o-linear-gradient(top, #543F1F, #3C2C16);
+  background-image: linear-gradient(to bottom, #543F1F, #3C2C16);
+  text-decoration: none;
+}  

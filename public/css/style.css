@@ -1,17 +1,51 @@
-/*body{
-	background-color: #D7E5E4;
-	font-family: 'Georgia';
-    color: gray;
-	font-size: 18px;
-	padding: 0;
-    margin: 0;
+body{
+	font-family: 'Muli';
+    color: #BCB296;
+	font-size: 14px;
+    background-color: #000;
+	/*padding: 0;
+    margin: 0;*/
     overflow-x: hidden;
-  }*/
+   
+  }
 
+a {
+    text-decoration: none;
+    color: #BCB296;
+}
+/**/
 .moreInfo {
 	display: none;
 }
 
+/*nav styling*/
+.navBtn{
+    font-family: 'Muli';
+    font-size: 20px;
+    width: 20%;
+    display: inline;
+    margin: 20px;
+    text-decoration: none;
+    letter-spacing: 4px;
+}
+.navBtn:hover {
+    font-family: 'Muli';
+    font-size: 20px;
+    background-color: rgba(188, 178, 150, 0.5);
+    width: 20%;
+    display: inline;
+    margin: 20px;
+    text-decoration: none;
+}
+
+.prodDesc {
+    font-family: 'Muli';
+    font-size: 18px;
+}
+
+.activeBtn:hover {
+    text-decoration: none;
+}
 /*styling for multiple scrolls*/
 #map-canvas {
 	width: 100%;
@@ -69,9 +103,10 @@
 
 .fruitstrip{
     padding: 20px;
-    background-image: url(http://www.wired.com/wp-content/uploads/images_blogs/wiredscience/2012/05/heikkileis_mould09.jpg);
+    background-image: url('../images/heikkileis_mould09.jpg');
     height: 100%;
     z-index: 10;
     color: #BDCFCD;
     background-color: #000;
 }
+

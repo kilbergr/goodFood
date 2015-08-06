@@ -28,9 +28,9 @@
 		</div>
 		<% }) %>
 	<p>
-		<div class="ui inverted blue button">
+		<!-- <div class="ui inverted blue button"> -->
 	<form action="/myRecalls/<%= myRecall.id %>?_method=delete" method="POST">
-	<input type="submit" value="Delete Saved Recall">
+	<input type="submit" class="ui inverted red button" value="Delete Saved Recall">
 	</form></div></p>
 	
 	<a href="/myRecalls"><p class="ui inverted blue button">Back to Saved Recalls</p></a>

@@ -96,28 +96,118 @@ var map,
 markers =[];
 function initialize() {
 
-  var styles = [
-  {
-    featureType: "all",
-    stylers: [
-    { hue: "#00ffee" },
-    { saturation: -50 }
-    ]
-  },{
-    featureType: "road.arterial",
-    elementType: "geometry",
-    stylers: [
+// inspiration for map styling from https://snazzymaps.com/style/41/hints-of-gold
+ var styles =   [
+    {
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+            {
+                "hue": "#cc9900"
+            },
+            {
+                "saturation": -30
+            },
+            {
+                "lightness": -81
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "all",
+        "stylers": [
+            {
+                "hue": "#666666"
+            },
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": -55
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "all",
+        "stylers": [
+            {
+                "hue": "#777777"
+            },
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": -6
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative",
+        "elementType": "all",
+        "stylers": [
+            {
+                "hue": "#cc9900"
+            },
+            {
+                "saturation": 100
+            },
+            {
+                "lightness": -22
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "hue": "#555555"
+            },
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": -57
+            },
+            {
+                "visibility": "off"
+            }
+        ]
+    }
+]
 
-    { saturation: 80 }
-    ]
-  },{
-    featureType: "poi.business",
-    elementType: "labels",
-    stylers: [
-    { visibility: "off" }
-    ]
-  }
-  ];
+// [
+  // {
+  //   featureType: "all",
+  //   stylers: [
+  //   { hue: "#5F3B18" },
+  //   { saturation: -40 }, 
+  //   {lightness: -25}, 
+  //   {invert lightness: true}
+  //   ]
+  // },{
+  //   featureType: "road.arterial",
+  //   elementType: "geometry",
+  //   stylers: [
+
+  //    { saturation: -32 }
+  //   ]
+  // }
+  // ];
 
   var styledMap = new google.maps.StyledMapType(styles,
     {name: "Styled Map"});

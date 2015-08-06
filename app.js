@@ -12,7 +12,7 @@ routeMiddleware = require("./middleware/routeHelper");
 //using dotenv to hide APIs
 require('dotenv').load();
 	//food API
- var foodKey= process.env.DB_FOOD;
+ var foodKey = process.env.DB_FOOD;
 
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
@@ -144,7 +144,7 @@ app.post('/recalls', function(req, res){
 	var recall = new db.Recall(req.body.recall);
 	if(recall.foodType!==undefined){
 		//can change later such that you can check a number of these boxes. Will change the terms then to search=field:term+AND+field:term
-		//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=reason_for_recall:"ice cream"&limit=25'
+	//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=reason_for_recall:"ice cream"&limit=25'
 		var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=reason_for_recall:"' + recall.foodType + '"&limit=25';
 	}
 	else if (recall.location!==undefined){
@@ -157,7 +157,8 @@ app.post('/recalls', function(req, res){
 //var url= 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=['+recall.yearBegin+'-'+ recall.monthBegin + '-' + recall.dayBegin + '+TO+'+recall.yearEnd+'-'+ recall.monthEnd + '-' + recall.dayEnd +']&limit=25';
 	}
 	
-	//console.log(url);
+	console.log("This is url: ", url);
+
 	request(url, function(error, response, body){
 	 	if(error){
 	 		console.log(error);
