@@ -13,28 +13,54 @@ a {
     text-decoration: none;
     color: #BCB296;
 }
-/**/
-.moreInfo {
-	display: none;
+/*classification stlying*/
+.classI{
+    transition: all 0.3s ease;
+}
+.classI:hover {
+    background-color: #9F564F;
+    color: #000;
+}
+.classII{
+    transition: all 0.3s ease;
+}
+.classII:hover {
+    background-color: #EAB150;
+    color: #000;
+}
+.classIII{
+    transition: all 0.3s ease;
+}
+.classIII:hover {
+    background-color: #6C7739;
+    color: #000;
+}
+
+.invertBtn {
+    border: solid 2px #BCB296;
+    color: #BCB296;
+    background-color: rgba(0,0,0,0);
+    font-family: 'Muli';
+    border-radius: 2px;
 }
 
 /*nav styling*/
 .navBtn{
     font-family: 'Muli';
-    font-size: 20px;
+    font-size: 24px;
     width: 20%;
     display: inline;
-    margin: 20px;
+    margin: 3%;
     text-decoration: none;
     letter-spacing: 4px;
 }
 .navBtn:hover {
     font-family: 'Muli';
-    font-size: 20px;
+    font-size: 24px;
     background-color: rgba(188, 178, 150, 0.5);
     width: 20%;
     display: inline;
-    margin: 20px;
+    margin: 3%;
     text-decoration: none;
 }
 

@@ -1,28 +1,6 @@
 <%include ../partials/headerRecalls %>
 
 
-<ul >
-
-	<li class="navBtn"><a href="/search">SEARCH</a>
-	</li>
-
-	<li class="navBtn">
-		<a href="/myRecalls">SAVE RECALL</a>
-	</li>
-
-	<li class="navBtn">
-		<a href="/login">ABOUT</a>
-	</li>
-
-	<li class="navBtn">
-		<a href="/signup">LOGIN</a>
-	</li>
-
-<li class="navBtn">
-		<a href="/myAccount/">PROFILE</a>
-	</li>
-</div>
-
 
 <div class="wrap">
 
@@ -35,13 +13,13 @@
 		<!-- What to display-->
 		<!-- Base color off of danger classification -->
 		<% if(recall.classification==='Class I'){%>
-			<div class="ui fluid inverted red basic button">
+			<div class="classI">
 		<%} %>
 		<% if(recall.classification==='Class II'){%>
-	  	<div class="ui fluid inverted basic yellow button">
+	  	<div class="classII">
 		<%} %>
 		<% if(recall.classification==='Class III'){%>
-			<div class="ui fluid inverted basic blue button">
+			<div class="classIII">
 		<%} %>
 		
 			<p class="prodDesc"><%= recall.product_description %></p>
@@ -55,26 +33,26 @@
 				<input type="hidden" name="recall[firm]" class="recalling_firm" value="<%=recall.recalling_firm%>"> 
 			  <input type="hidden" name="recall[date]" class="report_date" value	="<%=dateFormat%>"> 
 			  <input type="hidden" name="recall[class]" class="classification" value	="<%=recall.classification%>"> 
-				<input class="ui inverted teal button" type="submit" value="More Info">
+				<input class="invertBtn" type="submit" value="Map">
 				
 			</form>
 
-			<div class="moreInfo">
+			<div >
 				
 			<p><%= recall.reason_for_recall %></p>
 			<p><%= recall.distribution_pattern %>.</p>
  		
- 		
- 			<form class="showLess ui inverted teal button" action="/recalls"><input type="submit" value="Less Info"></form>
-			<form class ="saveRecall" action="/myRecalls" method="POST"><input class="ui inverted teal button" data-title="Log in to Save Recalls" type="submit" value="Save to My Recalls"></form>
+ 			<form class="showLess" action="/recalls"><input class="invertBtn" type="submit" value="Remove"></form>
+			<form class ="saveRecall" action="/myRecalls" method="POST"><input class="invertBtn" data-title="Log in to Save Recalls" type="submit" value="+ Recalls"></form>
  		</div>
-			<!-- <hr> -->
+			
 	</div>
 	<% }) %>
 	</div>
 	<div class="mapSide">
-	<div id="map-canvas">MAP</div>
 
+	<div id="map-canvas">MAP</div>
+<!-- including twitter feed of recent recalls -->
 	<a class="twitter-timeline" href="https://twitter.com/search?q=%23recall%20food" data-widget-id="614247041103872000">Tweets about food #recall(s)</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 </div>
