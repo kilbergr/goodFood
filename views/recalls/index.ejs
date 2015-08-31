@@ -3,18 +3,39 @@
 <div class="upper">	
 			<table class="stay">
 			<tr>
-				<td class="colorSqI">&nbsp</td>
-				<td>Class I: Dangerous or defective products that predictably could cause serious health problems or death.</td>
-			</tr>
-			<tr>
-				<td class="colorSqII">&nbsp</td>
-				<td>Class II: Products that might cause a temporary health problem, or pose only a slight threat of a serious nature.</td>
-			</tr>
-			<tr>
-				<td class="colorSqIII">&nbsp</td>
-				<td>Class III: Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws. </td>
-			</tr>
-		</table>
+				<td>
+				<table>
+					<tr>
+						<td class="colorSqI">&nbsp</td>
+						<td>Class I: Dangerous or defective products that predictably could cause serious health problems or death.</td>
+					</tr>
+					<tr>
+						<td class="colorSqII">&nbsp</td>
+						<td>Class II: Products that might cause a temporary health problem, or pose only a slight threat of a serious nature.</td>
+					</tr>
+					<tr>
+						<td class="colorSqIII">&nbsp</td>
+						<td>Class III: Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws. </td>
+					</tr>
+					</table>
+				</td>
+				<td>
+				<h2 id="lookUp">Pick Your Poison, Dear</h2>
+
+		  <div class="searchform">
+				 <form id="searchForm" action="/search" method="POST">
+					 <label for="foodType">
+					<input type="radio" name="search" value="foodType" id="foodType">  Type of Food  </label>
+					 <label for="location">
+					<input type="radio" name="search" value="location" id="location">  Distribution Area  </label>
+					 <label for="date">
+					<input type="radio" name="search" value="date" id="dateRange">  Date Range  </label>
+					<input class="invertBtn" type="submit" value="Submit">
+					</form>
+				</div>
+				</td>
+				</tr>
+			</table>
 
 </div>
 
@@ -52,7 +73,7 @@
 						<input type="hidden" name="recall[firm]" class="recalling_firm" value="<%=recall.recalling_firm%>"> 
 						<input type="hidden" name="recall[date]" class="report_date" value	="<%=dateFormat%>"> 
 						<input type="hidden" name="recall[class]" class="classification" value	="<%=recall.classification%>"> 
-						<input class="invertBtn" type="submit" value="Map Distribution">
+						<input class="invertBtn" type="submit" value="Map Distribution, Dear">
 					</form>
 					<div >
 	
@@ -74,7 +95,7 @@
 				<% }) %>
 			</div>
 			<div class="mapSide">
-				<div>NEW SEARCH</div>
+				
 				<div id="map-canvas">MAP</div>
 				<!-- including twitter feed of recent recalls -->
 				<a class="twitter-timeline" href="https://twitter.com/search?q=%23recall%20food" data-widget-id="614247041103872000">Tweets about food #recall(s)</a>

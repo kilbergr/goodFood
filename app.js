@@ -72,6 +72,10 @@ app.get('/logout', function(req, res){
 	res.redirect('/');
 })
 
+//
+app.get('/about', function(req,res){
+	res.render("static/about")
+})
 //account holders routes
 //account info
 app.get('/myAccount', routeMiddleware.ensureLoggedIn, function(req, res){

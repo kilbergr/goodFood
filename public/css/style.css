@@ -5,8 +5,7 @@ body{
     background-color: #000;
 	/*padding: 0;
     margin: 0;*/
-    overflow-x: hidden;
-   
+    overflow-x: hidden; 
   }
 
 a {
@@ -43,6 +42,7 @@ a {
     font-family: 'Muli';
     border-radius: 2px;
     display: inline;
+    margin: 5px;
 }
 .invertBtn:hover{
     cursor: pointer;
@@ -60,13 +60,13 @@ a {
     height: 2%;
     width: 2%;
     background-color: #EAB150; 
-    margin: 2px;
+    margin: 1%;
 }
 .colorSqIII {
     height: 2%;
     width: 2%;
     background-color: #6C7739;
-    margin: 2px;
+    margin: 1%;
 }
 
 .stay {
@@ -74,18 +74,21 @@ a {
     height: 10%;
     top: 33%;
 }
-
-.scroll {
+.searchform {
+    margin: 2%;
+}
+/*.scroll {
     top: 50%;
     overflow:scroll;
     height: 60%;
-}
+}*/
 
-.upper {
+/*.upper {
     background-color: #000;
     width: 100%;
     height: 10%;
-}
+    margin: 2%;
+}*/
 
 /*nav styling*/
 .navBtn{
@@ -114,9 +117,6 @@ a {
     font-size: 18px;
 }
 
-.activeBtn:hover {
-    text-decoration: none;
-}
 /*styling for multiple scrolls*/
 #map-canvas {
 	width: 100%;
@@ -158,8 +158,8 @@ a {
     display: flex;
     background-image: url(http://www.wired.com/wp-content/uploads/images_blogs/wiredscience/2012/05/heikkileis_mould09.jpg);
     z-index: 10;
-    padding-top: -200px;
-    margin-top: -120px;
+    padding-top: -12%;
+    margin-top: -13%;
     height: 300px;
     color: #BDCFCD;
 }
@@ -168,7 +168,7 @@ a {
 	display: flex;
     overflow: hidden;
     height: 150vh;
-    margin-top: -200px;
+    margin-top: -190px;
     padding-top: 300px;
 }
 
