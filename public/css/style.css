@@ -12,6 +12,12 @@ a {
     text-decoration: none;
     color: #BCB296;
 }
+
+.container {
+    margin: 10px;
+    padding: 10px;
+
+}
 /*classification stlying*/
 .classI{
     transition: all 0.3s ease;

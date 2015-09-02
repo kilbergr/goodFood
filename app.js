@@ -118,17 +118,11 @@ app.put('/myAccount/:id', routeMiddleware.ensureLoggedIn, function(req, res){
 
 //search page routes
 app.get('/', function(req, res){
-	res.redirect('/search')
+	res.redirect('/recalls')
 });
 
-//to show search page
-app.get('/search', function(req, res){
-	res.render('recalls/search')
-})
-
-
 app.get('/recalls', function(req, res){
-	var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=reason_for_recall:"ice cream"&limit=25';
+	var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=[20150601+TO+20150901]&limit=25'; 
 	request(url, function(error, response, body){
 	 	if(error){
 	 		console.log(error); 
@@ -156,7 +150,7 @@ app.post('/recalls', function(req, res){
 		var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=distribution_pattern:"' + recall.location + '"&limit=25';
 	}
 	else if (recall.dateBegin!==undefined && recall.dateEnd!==undefined){
-		//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=[2004-01-01+TO+2005-01-01]&limit=25
+		//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=[20040101+TO+20050101]&limit=25
 		var url= 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=report_date:['+recall.dateBegin+'+TO+'+recall.dateEnd+']&limit=25';
 //var url= 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=['+recall.yearBegin+'-'+ recall.monthBegin + '-' + recall.dayBegin + '+TO+'+recall.yearEnd+'-'+ recall.monthEnd + '-' + recall.dayEnd +']&limit=25';
 	}
