@@ -1,4 +1,4 @@
-<%include ../partials/headerSearch %>
+<%include ../partials/headerRecalls %>
 <div class="fruitstrip">
 	<div class="ui inverted form">
 		<p>First Name: <%= user.firstName %></p>
@@ -6,9 +6,9 @@
 		<p>Email: <%= user.email %></p>
 		<p>Profile Picture: <img height="100px" src="<%=user.avatar%>"></p>
 
-		<a href="/myAccount/<%= user.id %>/edit"><div class="ui inverted teal button">Edit User Account</div></a>
-		<a href="/search"><div class="ui inverted teal button">New Search</div></a>
-		<a href="/logout"><div class="ui inverted teal button"> Logout</div></a>
+		<a href="/myAccount/<%= user.id %>/edit"><div class="navBtn">Edit User Account</div></a>
+		<a href="/search"><div class="navBtn">New Search</div></a>
+		<a href="/logout"><div class="navBtn"> Logout</div></a>
 
 	</div>
 </div>

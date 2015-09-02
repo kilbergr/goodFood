@@ -1,4 +1,4 @@
-<% include ../partials/headerSearch %>
+<% include ../partials/headerRecall %>
 <div class="fruitstrip">
 	<div class="ui inverted">
 		<h2>Comments</h2>
@@ -8,20 +8,20 @@
 				<p class="comment">--Originally commented on <%= comment.date %> by <%= user.firstName%></p>
 				
 			  <form action="/myRecalls/:myRecall_id/comments/<%= comment._id%>?_method=DELETE" method="POST">
-		    <input type="submit" value="Delete" class="ui inverted blue button">
+		    <input type="submit" value="Delete" class="navBtn">
 		  </form>
 			<hr>
 		</div>
 		<% }) %>
 		<p>
 			<a href="/myRecalls/<%= myRecall.id %>/comments/new"><div class="ui inverted blue button">New Comment</div></a>
-			<a href="/myRecalls/<%= myRecall.id %>"><div class="ui inverted blue button">Return to Recall Information</div></a>
-			<a href="/myRecalls"><div class="ui inverted blue button">All Saved Recalls</div></a>
+			<a href="/myRecalls/<%= myRecall.id %>"><div class="navBtn">Return to Recall Information</div></a>
+			<a href="/myRecalls"><div class="navBtn">All Saved Recalls</div></a>
 		</p>
 
-		<a href="/signup">	<div class="ui inverted teal button">Signup</div></a>
-		<a href="/login"><div class="ui inverted teal button">Login</div></a>
-		<a href="/logout"><div class="ui inverted teal button"> Logout</div></a>
+		<a href="/signup">	<div class="navBtn">Signup</div></a>
+		<a href="/login"><div class="navBtn">Login</div></a>
+		<a href="/logout"><div class="navBtn"> Logout</div></a>
 		</div>
 	</div>
 
