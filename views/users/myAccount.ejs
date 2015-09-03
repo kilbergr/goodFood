@@ -1,13 +1,12 @@
 <%include ../partials/headerRecalls %>
-	<div class="ui inverted form">
+	<div class="dropIn">
 		<p>First Name: <%= user.firstName %></p>
 		<p>Last Name: <%= user.lastName %></p>
 		<p>Email: <%= user.email %></p>
-		<p>Profile Picture: <img height="100px" src="<%=user.avatar%>"></p>
 
-		<a href="/myAccount/<%= user.id %>/edit"><div class="invertBtn">Edit User Account</div></a>
-		<a href="/recalls"><div class="invertBtn">New Search</div></a>
-		<a href="/logout"><div class="invertBtn"> Logout</div></a>
+		<div><a href="/myAccount/<%= user.id %>/edit"><div class="invertBtn">Edit User Account</div></a></div>
+		<div><a href="/recalls"><div class="invertBtn">New Search</div></a></div>
+		<div><a href="/logout"><div class="invertBtn"> Logout</div></a></div>
 
 	</div>
 </div>

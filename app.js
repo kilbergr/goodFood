@@ -141,18 +141,32 @@ app.get('/recalls', function(req, res){
 app.post('/recalls', function(req, res){
 	var recall = new db.Recall(req.body.recall);
 	if(recall.foodType!==undefined){
-		//can change later such that you can check a number of these boxes. Will change the terms then to search=field:term+AND+field:term
-	//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=reason_for_recall:"ice cream"&limit=25'
+		if (recall.location!==undefined){
+			if (recall.dateBegin!==undefined && recall.dateEnd!==undefined){
+				// https://api.fda.gov/food/enforcement.json?api_key=GQisS7xWftem2wq39sv7zlVFVe7EG18DE2eFbDkI&search=reason_for_recall:"chicken"+distribution_pattern:"Indiana"+[20140101+TO+20150901]&limit=25
+				var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=reason_for_recall:"' + recall.foodType + '"+distribution_pattern:"'+ recall.location +'"+['+recall.dateBegin+'+TO+'+recall.dateEnd+']&limit=25';
+			}
+			else {
+				var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=reason_for_recall:"' + recall.foodType + '"+distribution_pattern:"'+ recall.location +'"&limit=25';
+			}
+			//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=reason_for_recall:"ice cream"&limit=25'
 		var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=reason_for_recall:"' + recall.foodType + '"&limit=25';
-	}
+		}
+	}	
 	else if (recall.location!==undefined){
-		//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=distribution_pattern:"ID"&limit=25
+		if (recall.dateBegin!==undefined && recall.dateEnd!==undefined){
+			// https://api.fda.gov/food/enforcement.json?api_key=GQisS7xWftem2wq39sv7zlVFVe7EG18DE2eFbDkI&search=distribution_pattern:"Indiana"+[20140101+TO+20150901]&limit=25
+				var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=distribution_pattern:"'+ recall.location +'"+['+recall.dateBegin+'+TO+'+recall.dateEnd+']&limit=25';
+			}
+		else {
+			//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=distribution_pattern:"ID"&limit=25
 		var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=distribution_pattern:"' + recall.location + '"&limit=25';
+		}
 	}
 	else if (recall.dateBegin!==undefined && recall.dateEnd!==undefined){
 		//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=[20040101+TO+20050101]&limit=25
 		var url= 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=report_date:['+recall.dateBegin+'+TO+'+recall.dateEnd+']&limit=25';
-//var url= 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=['+recall.yearBegin+'-'+ recall.monthBegin + '-' + recall.dayBegin + '+TO+'+recall.yearEnd+'-'+ recall.monthEnd + '-' + recall.dayEnd +']&limit=25';
+//var url= 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=['+recall.yearBegin+recall.monthBegin + recall.dayBegin + '+TO+'+recall.yearEnd+ recall.monthEnd + recall.dayEnd +']&limit=25';
 	}
 	
 	console.log("This is url: ", url);

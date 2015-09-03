@@ -1,21 +1,21 @@
-<% include ../partials/headerSearch %>
-<div class="fruitstrip">
+<% include ../partials/headerRecalls %>
 <div class="ui inverted form">
-    <h1>Edit Account User Information</h1>
-    <div id="profile">
+    <h2 style="text-align:center">Edit Account User Information</h2> 
+    <div class="dropIn" id="profile">
+   
     <form method="POST" action="/myAccount/<%= user.id %>?_method=PUT">
       <div>
-        <label for="firstName">Edit First Name:    
+        <label for="firstName">First Name: <br/>   
           <input type="text" name="user[firstName]" value="<%= user.firstName %>" autofocus>
         </label>
       </div>
         <div>
-        <label for="lastName">Edit Last Name:    
+        <label for="lastName">Last Name:  <br/>  
           <input type="text" name="user[lastName]" value="<%= user.lastName %>">
         </label>
       </div>
       <div>
-        <label for="user">Edit Email:    
+        <label for="user">Email:    <br/>
           <input type="text" id="email" name="user[email]" value="<%= user.email %>">
         </label>
       </div>
@@ -25,17 +25,17 @@
           <input type="password" id="pass" name="user[password]">
          </label>
       </div> -->
+    <!-- THIS FEATURE DOESN'T MAKE A WHOLE LOT OF SENSE 
       <div>
         <label> Edit profile picture (URL):
         <input type="text" name="user[avatar]" value="<%= user.avatar %>">
         </label>
-      </div>
-      <div class="navBtn">
-        <input type="submit" value="Edit">
-      </div>
+      </div> -->
+     
+        <input class="invertBtn" type="submit" value="Edit">
+   
     </form>
     </div>
-    <div class="navBtn"><a href="/login">Have an account? Login in instead</a></div>
     </div>
   </div>
 <% include ../partials/footer %>

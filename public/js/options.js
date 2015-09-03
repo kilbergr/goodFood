@@ -3,15 +3,16 @@ $(document).ready(function(){
 
   var radioValue = function(){
   //	var radios = form.elements[name];
+  var valArr = [];
   	var radios = document.getElementById('searchForm').elements['search'];
   	 for (var i=0; i<radios.length; i++) {
   	 	//if that button is checked
         if ( radios[i].checked ) { 
         	//save and return that value	
-          var val = radios[i].value; 
-            return val; 
-          }
+           valArr.push(radios[i].value); 
+          }       
         }
+       return valArr; 
       }
 
 // $("#dateBegin").datepicker({
@@ -21,9 +22,10 @@ $(document).ready(function(){
 //Show submission form on radio
 $('#searchForm').submit(function(event){
 	event.preventDefault();
-	var val =  radioValue();
+	debugger;
+	var vals =  radioValue();
 	var divSubmit;
-	if(val==='foodType'){
+	if(vals[0]==='foodType'){
 			var html = '<div class="ui fluid icon input"><form id="newFoodSearch" action="/recalls" method="POST">' +
 		'<label for="inReason">Food: <input type="text" name="recall[foodType]" id="food" autofocus placeholder="Search by food..."> </label>';
 		//divSubmit = '#newFoodSearch';
