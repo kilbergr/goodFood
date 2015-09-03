@@ -22,23 +22,39 @@ $(document).ready(function(){
 //Show submission form on radio
 $('#searchForm').submit(function(event){
 	event.preventDefault();
-	debugger;
+	
 	var vals =  radioValue();
 	var divSubmit;
 	if(vals[0]==='foodType'){
-			var html = '<div class="ui fluid icon input"><form id="newFoodSearch" action="/recalls" method="POST">' +
-		'<label for="inReason">Food: <input type="text" name="recall[foodType]" id="food" autofocus placeholder="Search by food..."> </label>';
-		//divSubmit = '#newFoodSearch';
+		if(vals[1]==='location'){
+			if(vals[2]==='date'){
+				var html = '<div class="ui fluid icon input"><form id="newSearch" action="/recalls" method="POST">' +
+				'<label for="inReason">Food: <input type="text" name="recall[foodType]" id="food" autofocus placeholder="Search by food..."> </label>' +
+				'<label for="inReason">Location: <input type="text" name="recall[location]" id="loc" placeholder="Search by location..."></label>' + 
+				'<label for="inReason">Beginning of Range: <input type="text" name="recall[dateBegin]" id="dateBegin" autofocus placeholder="YYYY-MM-DD">' +
+	    	'</label><label for="inReason">  End of Range: <input type="text" name="recall[dateEnd]" id="dateEnd" placeholder="YYYY-MM-DD"></label>';
+			}
+			else {
+				var html = '<div class="ui fluid icon input"><form id="newSearch" action="/recalls" method="POST">' +
+				'<label for="inReason">Food: <input type="text" name="recall[foodType]" id="food" autofocus placeholder="Search by food..."> </label>' +
+				'<div><label for="inReason">Location: <input type="text" name="recall[location]" id="loc" autofocus placeholder="Search by location..."></label></div>';
+			}
 		}
+		else {
+			'<div class="ui fluid icon input"><form id="newSearch" action="/recalls" method="POST">' +
+			'<label for="inReason">Food: <input type="text" name="recall[foodType]" id="food" autofocus placeholder="Search by food..."> </label>';
+		}
+		//divSubmit = '#newFoodSearch';
+	}
 		//for searching by distribution area
 		else if (val ==='location'){
-				var html = '<div class="ui fluid icon input"><form id="newLocSearch" action="/recalls" method="POST">' +
+				var html = '<div class="ui fluid icon input"><form id="newSearch" action="/recalls" method="POST">' +
 			'<label for="inReason">Location: <input type="text" name="recall[location]" id="loc" autofocus placeholder="Search by location..."></label>';
 			//divSubmit = '#newLocSearch';
 		}
 		//for searching by date range
 		else if (val === 'date'){
-			var html = '<div class="ui icon input"><form id="newDateSearch" action="/recalls" method="POST">' +
+			var html = '<div class="ui icon input"><form id="newSearch" action="/recalls" method="POST">' +
 			//Trying datepicker and failing
 			//'<label for="inReason">Beginning of Range: <input type="text" name="test" id="dateBegin"></label>'
 		  //'<label for="inReason">Beginning of Range: <input type="text" name="recall[dateBegin]" id="dateBegin" placeholder="YYYY-MM-DD">'

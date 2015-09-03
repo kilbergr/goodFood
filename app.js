@@ -140,7 +140,9 @@ app.get('/recalls', function(req, res){
 
 app.post('/recalls', function(req, res){
 	var recall = new db.Recall(req.body.recall);
+	// multiple choice possibilities
 	if(recall.foodType!==undefined){
+		debugger;
 		if (recall.location!==undefined){
 			if (recall.dateBegin!==undefined && recall.dateEnd!==undefined){
 				// https://api.fda.gov/food/enforcement.json?api_key=GQisS7xWftem2wq39sv7zlVFVe7EG18DE2eFbDkI&search=reason_for_recall:"chicken"+distribution_pattern:"Indiana"+[20140101+TO+20150901]&limit=25
@@ -164,12 +166,16 @@ app.post('/recalls', function(req, res){
 		}
 	}
 	else if (recall.dateBegin!==undefined && recall.dateEnd!==undefined){
-		//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=[20040101+TO+20050101]&limit=25
+		if (recall.foodType!==undefined){
+			var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=reason_for_recall:"'+ recall.foodType +'"+['+recall.dateBegin+'+TO+'+recall.dateEnd+']&limit=25';
+		}
+		else {
+			//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=[20040101+TO+20050101]&limit=25
 		var url= 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=report_date:['+recall.dateBegin+'+TO+'+recall.dateEnd+']&limit=25';
-//var url= 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=['+recall.yearBegin+recall.monthBegin + recall.dayBegin + '+TO+'+recall.yearEnd+ recall.monthEnd + recall.dayEnd +']&limit=25';
+		//var url= 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=['+recall.yearBegin+recall.monthBegin + recall.dayBegin + '+TO+'+recall.yearEnd+ recall.monthEnd + recall.dayEnd +']&limit=25';
+		}
 	}
 	
-	console.log("This is url: ", url);
 
 	request(url, function(error, response, body){
 	 	if(error){
