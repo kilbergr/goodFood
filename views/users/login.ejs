@@ -1,22 +1,30 @@
 <% include ../partials/headerRecalls %>
-  <div class="fruitstrip">
-
+  
 <h1>Login</h1>
 <div class="ui inverted form">
 <form method="POST" action="/login" >
-  <div>
-    <label for="email"> Email:     </label>
+<table>
+  <tr>
+    <td> 
+    <div>
+    <label for="email"> Email:
       <input type="text" id="email" name="user[email]" autofocus>
-
-  </div>
-  <div>
-    <label for="pass"> Password:</label>
+    </label>
+    </div>
+    </td>
+    <td>
+    <div>
+    <label for="pass"> Password:
       <input type="password" id="pass" name="user[password]">
-
-  </div>
-  <input class="navBtn" type="submit" value="Login">
-</form>
-<div class="navBtn"><a href="/signup">Need an account? Sign up here!</a></div>
-</div>
+    </label>
+    </div>
+    </td>
+    <td>
+     <input class="invertBtn" type="submit" value="Login">
+    </td>
+  </tr>
+</table>
+ </form>
+<div class="invertBtn"><a href="/signup">Need an account? Sign up here!</a></div>
 </div>
 <% include ../partials/footer %>

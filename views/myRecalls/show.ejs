@@ -1,4 +1,4 @@
-<% include ../partials/headerRecall %>
+<% include ../partials/headerRecalls %>
 <div class="fruitstrip">
 	<!-- To be shown -->
 	<h2>Information on this recall from the FDA's database:</h2>
@@ -30,11 +30,11 @@
 	<p>
 		<!-- <div class="ui inverted blue button"> -->
 	<form action="/myRecalls/<%= myRecall.id %>?_method=delete" method="POST">
-	<input type="submit" class="ui inverted red button" value="Delete Saved Recall">
+	<input type="submit" class="invertBtn" value="Delete Saved Recall">
 	</form></div></p>
 	
-	<a href="/myRecalls"><p class="navBtn">Back to Saved Recalls</p></a>
-	<a href="/Search"><p class="navBtn">New Search</p></a>
+	<a href="/myRecalls"><p class="invertBtn">Back to Saved Recalls</p></a>
+	<a href="/recalls"><p class="invertBtn">New Search</p></a>
 </div>
 
 <% include ../partials/footer %>

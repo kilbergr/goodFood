@@ -12,7 +12,16 @@ a {
     text-decoration: none;
     color: #BCB296;
 }
-
+h1{
+    font-family: 'Muli';
+    font-size: 24px;
+    letter-spacing: 4px;    
+}
+h2 {
+    font-family: 'Muli';
+    font-size: 18px;
+    letter-spacing: 4px;
+}
 .container {
     margin: 10px;
     padding: 10px;
@@ -49,6 +58,7 @@ a {
     border-radius: 2px;
     display: inline;
     margin: 5px;
+    padding: 5px;
 }
 .invertBtn:hover{
     cursor: pointer;
@@ -83,18 +93,15 @@ a {
 .searchform {
     margin: 2%;
 }
-/*.scroll {
-    top: 50%;
-    overflow:scroll;
-    height: 60%;
-}*/
 
-/*.upper {
-    background-color: #000;
-    width: 100%;
-    height: 10%;
-    margin: 2%;
-}*/
+.dropIn {
+    text-align: center;
+    height: 40%;
+    width: 20%;
+    margin-right: 40%;
+    margin-left: 40%;
+    /*padding: 10%;*/
+}
 
 /*nav styling*/
 .navBtn{
@@ -178,12 +185,12 @@ a {
     padding-top: 300px;
 }
 
-.fruitstrip{
+/*.fruitstrip{
     padding: 20px;
     background-image: url('../images/heikkileis_mould09.jpg');
     height: 100%;
     z-index: 10;
     color: #BDCFCD;
     background-color: #000;
-}
+}*/
 

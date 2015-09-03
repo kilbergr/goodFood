@@ -1,14 +1,13 @@
 <%include ../partials/headerRecalls %>
-<div class="fruitstrip">
 	<div class="ui inverted form">
 		<p>First Name: <%= user.firstName %></p>
 		<p>Last Name: <%= user.lastName %></p>
 		<p>Email: <%= user.email %></p>
 		<p>Profile Picture: <img height="100px" src="<%=user.avatar%>"></p>
 
-		<a href="/myAccount/<%= user.id %>/edit"><div class="navBtn">Edit User Account</div></a>
-		<a href="/search"><div class="navBtn">New Search</div></a>
-		<a href="/logout"><div class="navBtn"> Logout</div></a>
+		<a href="/myAccount/<%= user.id %>/edit"><div class="invertBtn">Edit User Account</div></a>
+		<a href="/recalls"><div class="invertBtn">New Search</div></a>
+		<a href="/logout"><div class="invertBtn"> Logout</div></a>
 
 	</div>
 </div>

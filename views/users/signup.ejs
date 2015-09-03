@@ -1,40 +1,62 @@
 <% include ../partials/headerRecalls %>
-<div class="fruitstrip">
-<div class="ui inverted form">
-    <h1>Sign up to save information about recalls</h1>
-    <div id="profile">
+ <h2 style="text-align: center">Sign up to save information about recalls</h2>
+  <div id="profile" >
+   <div class="dropIn">
     <form method="POST" action="/signup" >
-      <div>
-        <label for="firstName">First Name:    
-          <input type="text" name="user[firstName]" autofocus>
-        </label>
-      </div>
+    <table>
+      <tr>
+        <td>
         <div>
-        <label for="lastName">Last Name:    
-          <input type="text" name="user[lastName]">
-        </label>
-      </div>
-      <div>
-        <label for="user">Email:    
-          <input type="text" id="email" name="user[email]">
-        </label>
-      </div>
-      <div>
-        <label> Password: 
-          <input type="password" id="pass" name="user[password]">
-         </label>
-      </div>
-      <div>
-        <label> Add profile picture (URL):
-        <input type="text" name="user[avatar]">
-        </label>
-      </div>
-      <div class="navBtn">
-        <input type="submit" value="Sign up">
-      </div>
+          <label for="firstName">First Name:    
+            <input type="text" name="user[firstName]" autofocus>
+          </label>
+        </div>
+        </td>
+        <td>
+        <div>
+          <label for="lastName">Last Name:    
+            <input type="text" name="user[lastName]">
+          </label>
+        </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        <div>
+          <label for="user">Email:    
+            <input type="text" id="email" name="user[email]">
+          </label>
+        </div>
+        </td>
+        <td>
+        <div>
+          <label> Password: 
+            <input type="password" id="pass" name="user[password]">
+           </label>
+        </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        <div>
+          <label> Add profile picture (URL):
+          <input type="text" name="user[avatar]">
+          </label>
+        </div>
+        </td>
+        <td>
+          <input class="invertBtn" type="submit" value="Sign up">
+        </td>
+      </tr>
+      <tr>
+        <td> 
+          <div class="invertBtn"><a href="/login">Login</a></div>
+        </td>
+      </tr>
+      </table>
     </form>
     </div>
-    <div class="navBtn"><a href="/login">Have an account? Login in instead</a></div>
-    </div>
   </div>
+ </div>
+</div>
 <% include ../partials/footer %>
