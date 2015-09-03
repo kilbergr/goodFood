@@ -24,42 +24,53 @@ $('#searchForm').submit(function(event){
 	event.preventDefault();
 	
 	var vals =  radioValue();
-	var divSubmit;
+	// var divSubmit;
 	if(vals[0]==='foodType'){
 		if(vals[1]==='location'){
 			if(vals[2]==='date'){
+				// food type with location and data search
 				var html = '<div class="ui fluid icon input"><form id="newSearch" action="/recalls" method="POST">' +
 				'<label for="inReason">Food: <input type="text" name="recall[foodType]" id="food" autofocus placeholder="Search by food..."> </label>' +
 				'<label for="inReason">Location: <input type="text" name="recall[location]" id="loc" placeholder="Search by location..."></label>' + 
 				'<label for="inReason">Beginning of Range: <input type="text" name="recall[dateBegin]" id="dateBegin" autofocus placeholder="YYYY-MM-DD">' +
 	    	'</label><label for="inReason">  End of Range: <input type="text" name="recall[dateEnd]" id="dateEnd" placeholder="YYYY-MM-DD"></label>';
 			}
+			// food type with location search
 			else {
 				var html = '<div class="ui fluid icon input"><form id="newSearch" action="/recalls" method="POST">' +
 				'<label for="inReason">Food: <input type="text" name="recall[foodType]" id="food" autofocus placeholder="Search by food..."> </label>' +
 				'<div><label for="inReason">Location: <input type="text" name="recall[location]" id="loc" autofocus placeholder="Search by location..."></label></div>';
 			}
 		}
+		// just food type
 		else {
-			'<div class="ui fluid icon input"><form id="newSearch" action="/recalls" method="POST">' +
+			var html = '<div class="ui fluid icon input"><form id="newSearch" action="/recalls" method="POST">' +
 			'<label for="inReason">Food: <input type="text" name="recall[foodType]" id="food" autofocus placeholder="Search by food..."> </label>';
 		}
 		//divSubmit = '#newFoodSearch';
 	}
 		//for searching by distribution area
-		else if (val ==='location'){
+		else if (vals[0] ==='location'){
+			if(vals[1]==='date'){
 				var html = '<div class="ui fluid icon input"><form id="newSearch" action="/recalls" method="POST">' +
-			'<label for="inReason">Location: <input type="text" name="recall[location]" id="loc" autofocus placeholder="Search by location..."></label>';
+				'<label for="inReason">Location: <input type="text" name="recall[location]" id="loc" autofocus placeholder="Search by location..."></label>' +
+				'<label for="inReason">Beginning of Range: <input type="text" name="recall[dateBegin]" id="dateBegin" autofocus placeholder="YYYY-MM-DD">' +
+	    	'</label><label for="inReason">  End of Range: <input type="text" name="recall[dateEnd]" id="dateEnd" placeholder="YYYY-MM-DD"></label>';
+			}
+			else {
+				var html = '<div class="ui fluid icon input"><form id="newSearch" action="/recalls" method="POST">' +
+				'<label for="inReason">Location: <input type="text" name="recall[location]" id="loc" autofocus placeholder="Search by location..."></label>';
 			//divSubmit = '#newLocSearch';
+			}
 		}
 		//for searching by date range
-		else if (val === 'date'){
+		else if (vals[0] === 'date'){
 			var html = '<div class="ui icon input"><form id="newSearch" action="/recalls" method="POST">' +
 			//Trying datepicker and failing
 			//'<label for="inReason">Beginning of Range: <input type="text" name="test" id="dateBegin"></label>'
 		  //'<label for="inReason">Beginning of Range: <input type="text" name="recall[dateBegin]" id="dateBegin" placeholder="YYYY-MM-DD">'
 			'<label for="inReason">Beginning of Range: <input type="text" name="recall[dateBegin]" id="dateBegin" autofocus placeholder="YYYY-MM-DD">' +
-	    '</label><label for="inReason">  End of Range: <input type="text" name="recall[dateEnd]" id="dateEnd" placeholder="YYYY-MM-DD"></label>'
+	    '</label><label for="inReason">  End of Range: <input type="text" name="recall[dateEnd]" id="dateEnd" placeholder="YYYY-MM-DD"></label>';
 			//divSubmit = '#newDateSearch';
 		}
 		else {
@@ -68,9 +79,6 @@ $('#searchForm').submit(function(event){
 	$('#searchForm').after(html + '<input class="invertBtn" type="submit" value="Find recalls" class="search icon"></div></form>');
 	$('#searchForm').css('display', 'none');
 	});
-
-
-
  });
 
 

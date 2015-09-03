@@ -139,7 +139,9 @@ app.get('/recalls', function(req, res){
 })
 
 app.post('/recalls', function(req, res){
+	debugger;
 	var recall = new db.Recall(req.body.recall);
+
 	// multiple choice possibilities
 	if(recall.foodType!==undefined){
 		debugger;
@@ -151,9 +153,11 @@ app.post('/recalls', function(req, res){
 			else {
 				var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=reason_for_recall:"' + recall.foodType + '"+distribution_pattern:"'+ recall.location +'"&limit=25';
 			}
-			//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=reason_for_recall:"ice cream"&limit=25'
-		var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=reason_for_recall:"' + recall.foodType + '"&limit=25';
 		}
+		else {
+			//should look like https://api.fda.gov/food/enforcement.json?api_key=APIKEYHERE&search=reason_for_recall:"ice cream"&limit=25'
+			var url = 'https://api.fda.gov/food/enforcement.json?api_key=' + foodKey +'&search=reason_for_recall:"' + recall.foodType + '"&limit=25';
+		}	
 	}	
 	else if (recall.location!==undefined){
 		if (recall.dateBegin!==undefined && recall.dateEnd!==undefined){
