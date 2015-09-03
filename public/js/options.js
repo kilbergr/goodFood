@@ -30,15 +30,15 @@ $('#searchForm').submit(function(event){
 			if(vals[2]==='date'){
 				// food type with location and data search
 				var html = '<div class="ui fluid icon input"><form id="newSearch" action="/recalls" method="POST">' +
-				'<label for="inReason">Food: <input type="text" name="recall[foodType]" id="food" autofocus placeholder="Search by food..."> </label>' +
-				'<label for="inReason">Location: <input type="text" name="recall[location]" id="loc" placeholder="Search by location..."></label>' + 
-				'<label for="inReason">Beginning of Range: <input type="text" name="recall[dateBegin]" id="dateBegin" autofocus placeholder="YYYY-MM-DD">' +
-	    	'</label><label for="inReason">  End of Range: <input type="text" name="recall[dateEnd]" id="dateEnd" placeholder="YYYY-MM-DD"></label>';
+				'<div><label for="inReason">Food: <input type="text" name="recall[foodType]" id="food" autofocus placeholder="Search by food..."> </label></div>' +
+				'<div><label for="inReason">Location: <input type="text" name="recall[location]" id="loc" placeholder="Search by location..."></label></div>' + 
+				'<div><label for="inReason">Beginning of Range: <input type="text" name="recall[dateBegin]" id="dateBegin" autofocus placeholder="YYYY-MM-DD">' +
+	    	'</label><label for="inReason">  End of Range: <input type="text" name="recall[dateEnd]" id="dateEnd" placeholder="YYYY-MM-DD"></label></div>';
 			}
 			// food type with location search
 			else {
 				var html = '<div class="ui fluid icon input"><form id="newSearch" action="/recalls" method="POST">' +
-				'<label for="inReason">Food: <input type="text" name="recall[foodType]" id="food" autofocus placeholder="Search by food..."> </label>' +
+				'<div><label for="inReason">Food: <input type="text" name="recall[foodType]" id="food" autofocus placeholder="Search by food..."> </label></div>' +
 				'<div><label for="inReason">Location: <input type="text" name="recall[location]" id="loc" autofocus placeholder="Search by location..."></label></div>';
 			}
 		}
@@ -53,9 +53,9 @@ $('#searchForm').submit(function(event){
 		else if (vals[0] ==='location'){
 			if(vals[1]==='date'){
 				var html = '<div class="ui fluid icon input"><form id="newSearch" action="/recalls" method="POST">' +
-				'<label for="inReason">Location: <input type="text" name="recall[location]" id="loc" autofocus placeholder="Search by location..."></label>' +
-				'<label for="inReason">Beginning of Range: <input type="text" name="recall[dateBegin]" id="dateBegin" autofocus placeholder="YYYY-MM-DD">' +
-	    	'</label><label for="inReason">  End of Range: <input type="text" name="recall[dateEnd]" id="dateEnd" placeholder="YYYY-MM-DD"></label>';
+				'<div><label for="inReason">Location: <input type="text" name="recall[location]" id="loc" autofocus placeholder="Search by location..."></label></div>' +
+				'<div><label for="inReason">Beginning of Range: <input type="text" name="recall[dateBegin]" id="dateBegin" autofocus placeholder="YYYY-MM-DD">' +
+	    	'</label><label for="inReason">  End of Range: <input type="text" name="recall[dateEnd]" id="dateEnd" placeholder="YYYY-MM-DD"></label></div>';
 			}
 			else {
 				var html = '<div class="ui fluid icon input"><form id="newSearch" action="/recalls" method="POST">' +

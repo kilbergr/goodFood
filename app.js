@@ -144,7 +144,6 @@ app.post('/recalls', function(req, res){
 
 	// multiple choice possibilities
 	if(recall.foodType!==undefined){
-		debugger;
 		if (recall.location!==undefined){
 			if (recall.dateBegin!==undefined && recall.dateEnd!==undefined){
 				// https://api.fda.gov/food/enforcement.json?api_key=GQisS7xWftem2wq39sv7zlVFVe7EG18DE2eFbDkI&search=reason_for_recall:"chicken"+distribution_pattern:"Indiana"+[20140101+TO+20150901]&limit=25
