@@ -43,6 +43,13 @@ $('#searchForm').submit(function(event){
 			}
 		}
 		// just food type
+		else if (vals[1]==='date'){
+			var html = '<div class="ui fluid icon input"><form id="newSearch" action="/recalls" method="POST">' +
+			'<label for="inReason">Food: <input type="text" name="recall[foodType]" id="food" autofocus placeholder="Search by food..."> </label>'+
+			'<div><label for="inReason">Beginning of Range: <input type="text" name="recall[dateBegin]" id="dateBegin" autofocus placeholder="YYYY-MM-DD">' +
+	    '</label><label for="inReason">  End of Range: <input type="text" name="recall[dateEnd]" id="dateEnd" placeholder="YYYY-MM-DD"></label></div>';
+		}
+
 		else {
 			var html = '<div class="ui fluid icon input"><form id="newSearch" action="/recalls" method="POST">' +
 			'<label for="inReason">Food: <input type="text" name="recall[foodType]" id="food" autofocus placeholder="Search by food..."> </label>';
